@@ -87,7 +87,7 @@ func (ctrl *DoctorController) Update(c echo.Context) error {
 	return controllers.NewSuccessResponse(c, response.FromDomainUpdateDoctor(result))
 
 }
-func (ctrl *DoctorController) SellerByID(c echo.Context) error {
+func (ctrl *DoctorController) DoctorByID(c echo.Context) error {
 
 	itemID, _ := strconv.Atoi(c.Param("id"))
 
