@@ -27,7 +27,7 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 
 	// Admins
 	e.POST("/api/v1/admins/login", cl.AdminController.Login)
-
+	e.POST("/api/v1/admins/register", cl.AdminController.Register)
 	e.POST("/api/v1/admins/add/doctor", cl.DoctorController.Register, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.POST("/api/v1/admins/add/patient", cl.PatientController.Register, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/patient/:id", cl.PatientController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())

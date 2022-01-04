@@ -20,6 +20,24 @@ func NewControllerAdmin(serv admins.Service) *AdminController {
 	}
 }
 
+func (ctrl *AdminController) Register(c echo.Context) error {
+
+	registerReq := request.Admins{}
+
+	if err := c.Bind(&registerReq); err != nil {
+		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
+	}
+
+	result, err := ctrl.adminService.Register(registerReq.ToDomain())
+
+	if err != nil {
+		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
+	}
+
+	return controllers.NewSuccessResponse(c, res.FromDomainRegister(result))
+
+}
+
 func (ctrl *AdminController) Login(c echo.Context) error {
 
 	loginReq := request.AdminLogin{}

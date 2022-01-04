@@ -17,6 +17,18 @@ func NewMysqlAdminRepository(conn *gorm.DB) admins.Repository {
 	}
 }
 
+func (rep *MysqlAdminRepository) Register(domain *admins.Domain) (admins.Domain, error) {
+
+	admin := fromDomain(*domain)
+
+	result := rep.Conn.Create(&admin)
+	if result.Error != nil {
+		return admins.Domain{}, result.Error
+	}
+
+	return toDomain(admin), nil
+}
+
 func (rep *MysqlAdminRepository) Login(username, password string) (admins.Domain, error) {
 	var admin Admins
 	err := rep.Conn.First(&admin, "username = ?", username).Error
