@@ -12,9 +12,11 @@ type Domain struct {
 }
 
 type Service interface {
+	Register(domain *Domain) (Domain, error)
 	Login(username, password string) (Domain, error)
 }
 
 type Repository interface {
+	Register(domain *Domain) (Domain, error)
 	Login(username, password string) (Domain, error)
 }
