@@ -72,7 +72,7 @@ func (ctrl *PatientController) Update(c echo.Context) error {
 	return controllers.NewSuccessResponse(c, response.FromDomainUpdateDoctor(result))
 
 }
-func (ctrl *PatientController) SellerByID(c echo.Context) error {
+func (ctrl *PatientController) PatientByID(c echo.Context) error {
 
 	itemID, _ := strconv.Atoi(c.Param("id"))
 
