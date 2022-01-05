@@ -64,3 +64,17 @@ func RoleValidationAdmin() echo.MiddlewareFunc {
 		}
 	}
 }
+
+func RoleValidationDoctor() echo.MiddlewareFunc {
+	return func(hf echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			claims := middlewareApp.GetUser(c)
+
+			if claims.Role == "doctor" {
+				return hf(c)
+			} else {
+				return controller.NewErrorResponse(c, http.StatusForbidden, business.ErrUnathorized)
+			}
+		}
+	}
+}
