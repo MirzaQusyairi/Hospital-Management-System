@@ -28,6 +28,7 @@ import (
 	_middlewares "Hospital-Management-System/app/middlewares"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/spf13/viper"
 	"gorm.io/gorm"
 )
@@ -72,6 +73,10 @@ func main() {
 	}
 
 	e := echo.New()
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
 
 	adminRepo := _driverFactory.NewAdminRepository(db)
 	adminService := _adminService.NewServiceAdmin(adminRepo, 10, &configJWT)
