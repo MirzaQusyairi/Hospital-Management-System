@@ -7,7 +7,7 @@ import (
 
 type PatientRegisterRespons struct {
 	Message   string    `json:"message"`
-	ID        int       `json:"id:"`
+	ID        int       `json:"id"`
 	Fullname  string    `json:"fullname"`
 	Gender    string    `json:"gender"`
 	NIK       int       `json:"nik"`

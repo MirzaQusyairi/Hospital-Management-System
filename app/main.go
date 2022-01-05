@@ -21,6 +21,10 @@ import (
 	_nurseController "Hospital-Management-System/controllers/nurses"
 	_nurseRepo "Hospital-Management-System/drivers/databases/nurses"
 
+	_faciltyService "Hospital-Management-System/business/facilities"
+	_faciltyController "Hospital-Management-System/controllers/facilities"
+	_faciltyRepo "Hospital-Management-System/drivers/databases/facilities"
+
 	_dbDriver "Hospital-Management-System/drivers/mysql"
 
 	_driverFactory "Hospital-Management-System/drivers"
@@ -49,7 +53,7 @@ func dbMigrate(db *gorm.DB) {
 	db.AutoMigrate(
 		&_adminRepo.Admins{},
 		&_doctorRepo.Doctors{},
-
+		&_faciltyRepo.Facilities{},
 		&_patientRepo.Patients{},
 
 		&_nurseRepo.Nurses{},
@@ -94,14 +98,18 @@ func main() {
 	nurseService := _nurseService.NewServiceNurse(nurseRepo, 10, &configJWT)
 	nurseCtrl := _nurseController.NewControllerDoctor(nurseService)
 
+	faciltyRepo := _driverFactory.NewFaciltyRepository(db)
+	faciltyService := _faciltyService.NewServiceFacilty(faciltyRepo)
+	faciltyCtrl := _faciltyController.NewControllerFacilty(faciltyService)
+
 	routesInit := _routes.ControllerList{
 		JWTMiddleware: configJWT.Init(),
 
 		AdminController:   *adminCtrl,
 		DoctorController:  *doctorCtrl,
 		PatientController: *patientCtrl,
-
-		NurseController: *nurseCtrl,
+		FaciltyController: *faciltyCtrl,
+		NurseController:   *nurseCtrl,
 	}
 
 	routesInit.RouteRegister(e)
