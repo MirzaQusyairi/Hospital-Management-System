@@ -47,7 +47,7 @@ func (ctrl *PatientController) AllPatient(c echo.Context) error {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
 
-	return controllers.NewSuccessResponse(c, response.FromDoctorListDomain(result))
+	return controllers.NewSuccessResponse(c, response.FromPatientListDomain(result))
 
 }
 
@@ -69,7 +69,7 @@ func (ctrl *PatientController) Update(c echo.Context) error {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
 
-	return controllers.NewSuccessResponse(c, response.FromDomainUpdateDoctor(result))
+	return controllers.NewSuccessResponse(c, response.FromDomainUpdatePatient(result))
 
 }
 func (ctrl *PatientController) PatientByID(c echo.Context) error {
@@ -80,7 +80,7 @@ func (ctrl *PatientController) PatientByID(c echo.Context) error {
 	if err != nil {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
-	return controllers.NewSuccessResponse(c, response.FromDomainAllDoctor(result))
+	return controllers.NewSuccessResponse(c, response.FromDomainAllPatient(result))
 }
 func (ctrl *PatientController) Delete(c echo.Context) error {
 
