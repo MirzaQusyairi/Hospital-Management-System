@@ -29,6 +29,7 @@ jobs:
           git config --local user.name "irula7x6"
           git add -A
           
+
           arr[0]="chore(bot): 😂 FIX DONE"
           arr[1]="chore(bot): 😱 DONE"
           arr[2]="chore(bot): 👿 CHECK BUG"
@@ -39,6 +40,7 @@ jobs:
           arr[7]="chore(bot): 🤖 JUST COMMIT"
           arr[8]="chore(bot): 🟩 ANYTHING"
           arr[9]="chore(bot): 👻 ALL DONE"
+
           
           rand=$[$RANDOM % ${#arr[@]}]
           
