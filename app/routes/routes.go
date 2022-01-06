@@ -9,6 +9,7 @@ import (
 	"Hospital-Management-System/controllers/facilities"
 	"Hospital-Management-System/controllers/nurses"
 	"Hospital-Management-System/controllers/patients"
+	"Hospital-Management-System/controllers/schedules"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -16,11 +17,12 @@ import (
 )
 
 type ControllerList struct {
-	JWTMiddleware     middleware.JWTConfig
-	PatientController patients.PatientController
-	FaciltyController facilities.FaciltyController
-	DoctorController  doctors.DoctorController
-	AdminController   admins.AdminController
+	JWTMiddleware      middleware.JWTConfig
+	PatientController  patients.PatientController
+	FaciltyController  facilities.FaciltyController
+	DoctorController   doctors.DoctorController
+	AdminController    admins.AdminController
+	ScheduleController schedules.ScheduleController
 
 	nurses.NurseController
 }
@@ -30,6 +32,12 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	// Admins
 	e.POST("/api/v1/admins/login", cl.AdminController.Login)
 	e.POST("/api/v1/admins/register", cl.AdminController.Register)
+
+	e.POST("/api/v1/admins/add/schedule", cl.ScheduleController.AddSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.PUT("/api/v1/admins/update/schedule/:id", cl.ScheduleController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.DELETE("/api/v1/admins/delete/schedule/:id", cl.ScheduleController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/list/schedule", cl.ScheduleController.AllSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/schedule/:id", cl.ScheduleController.ScheduleByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 
 	e.POST("/api/v1/admins/add/facilty", cl.FaciltyController.AddFacilty, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/facilty/:id", cl.FaciltyController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
