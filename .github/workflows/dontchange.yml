@@ -21,7 +21,7 @@ jobs:
       - name: Modify last update
         run: |
           d=`date '+%Y-%m-%dT%H:%M:%SZ'`
-          echo $d > LAST_UPDATED_ME
+          echo $d > LAST_UPDATED
           
       - name: Commit changes
         run: |
@@ -29,16 +29,16 @@ jobs:
           git config --local user.name "irula7x6"
           git add -A
           
-          arr[0]="😂 FIX DONE"
-          arr[1]="😱 DONE"
-          arr[2]="👿 CHECK BUG"
-          arr[3]="💩 FIX ANOTHER BUG"
-          arr[4]="🙏 TRY TO FIX BUG"
-          arr[5]="🙈 SCANNING BUG"
-          arr[6]="🐐 TEST CODE"
-          arr[7]="🤖 JUST COMMIT"
-          arr[8]="🟩 ANYTHING"
-          arr[9]="👻 ALL DONE"
+          arr[0]="chore(bot): 😂 FIX DONE"
+          arr[1]="chore(bot): 😱 DONE"
+          arr[2]="chore(bot): 👿 CHECK BUG"
+          arr[3]="chore(bot): 💩 FIX ANOTHER BUG"
+          arr[4]="chore(bot): 🙏 TRY TO FIX BUG"
+          arr[5]="chore(bot): 🙈 SCANNING BUG"
+          arr[6]="chore(bot): 🐐 TEST CODE"
+          arr[7]="chore(bot): 🤖 JUST COMMIT"
+          arr[8]="chore(bot): 🟩 ANYTHING"
+          arr[9]="chore(bot): 👻 ALL DONE"
           
           rand=$[$RANDOM % ${#arr[@]}]
           
