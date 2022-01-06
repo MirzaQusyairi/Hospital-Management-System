@@ -38,7 +38,7 @@ jobs:
           arr[6]="🐐 TEST CODE"
           arr[7]="🤖 JUST COMMIT"
           arr[8]="🟩 ANYTHING"
-          arr[9]="👻 ALL DONE"
+          arr[9]="👻 ALL DONE BROTHER"
           
           rand=$[$RANDOM % ${#arr[@]}]
           
