@@ -9,16 +9,16 @@ type ScheduleRegisterResponse struct {
 	Message   string    `json:"message"`
 	ID        int       `json:"id"`
 	Day       string    `json:"day"`
-	Start     time.Time `json:"start"`
-	End       time.Time `json:"end"`
+	Start     string    `json:"start"`
+	End       string    `json:"end"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
 type ScheduleResponse struct {
 	ID        int       `json:"id:"`
 	Day       string    `json:"day"`
-	Start     time.Time `json:"start"`
-	End       time.Time `json:"end"`
+	Start     string    `json:"start"`
+	End       string    `json:"end"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

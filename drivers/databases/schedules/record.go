@@ -11,8 +11,8 @@ type Schedules struct {
 	gorm.Model
 	ID        int `gorm:"primary_key"`
 	Day       string
-	Start     time.Time
-	End       time.Time
+	Start     string
+	End       string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
