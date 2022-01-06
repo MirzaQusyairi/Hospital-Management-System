@@ -7,7 +7,7 @@ import (
 
 type DoctorRegisterRespons struct {
 	Message      string    `json:"message"`
-	ID           int       `json:"id:"`
+	ID           int       `json:"id"`
 	Username     string    `json:"username"`
 	Password     string    `json:"password"`
 	Fullname     string    `json:"fullname"`
@@ -19,7 +19,7 @@ type DoctorRegisterRespons struct {
 	UpdatedAt    time.Time `json:"updated_at"`
 }
 type DoctorResponse struct {
-	ID           int       `json:"id:"`
+	ID           int       `json:"id"`
 	Username     string    `json:"username"`
 	Fullname     string    `json:"fullname"`
 	Specialist   string    `json:"specialist"`

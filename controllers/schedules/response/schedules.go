@@ -15,7 +15,7 @@ type ScheduleRegisterResponse struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 type ScheduleResponse struct {
-	ID        int       `json:"id:"`
+	ID        int       `json:"id"`
 	Day       string    `json:"day"`
 	Start     string    `json:"start"`
 	End       string    `json:"end"`

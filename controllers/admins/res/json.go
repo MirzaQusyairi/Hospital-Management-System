@@ -7,7 +7,7 @@ import (
 
 type AdminRegisterResponse struct {
 	Message   string    `json:"message"`
-	ID        int       `json:"id:"`
+	ID        int       `json:"id"`
 	Username  string    `json:"username"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`

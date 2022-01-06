@@ -7,7 +7,7 @@ import (
 
 type AddResponse struct {
 	Message   string    `json:"message"`
-	ID        int       `json:"id:"`
+	ID        int       `json:"id"`
 	Name      string    `json:"name"`
 	Queue     int       `json:"queue"`
 	Location  string    `json:"location"`
@@ -18,7 +18,7 @@ type AddResponse struct {
 
 type UpdateResponse struct {
 	Message   string    `json:"message"`
-	ID        int       `json:"id:"`
+	ID        int       `json:"id"`
 	Name      string    `json:"name"`
 	Queue     int       `json:"queue"`
 	Location  string    `json:"location"`
