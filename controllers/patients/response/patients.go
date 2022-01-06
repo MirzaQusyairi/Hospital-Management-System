@@ -43,7 +43,7 @@ func FromDomainRegister(domain patients.Domain) PatientRegisterRespons {
 		UpdatedAt: domain.UpdatedAt,
 	}
 }
-func FromDomainAllDoctor(domain patients.Domain) PatientResponse {
+func FromDomainAllPatient(domain patients.Domain) PatientResponse {
 	return PatientResponse{
 		ID:        domain.ID,
 		Fullname:  domain.Fullname,
@@ -57,7 +57,7 @@ func FromDomainAllDoctor(domain patients.Domain) PatientResponse {
 	}
 }
 
-func FromDomainUpdateDoctor(domain patients.Domain) PatientRegisterRespons {
+func FromDomainUpdatePatient(domain patients.Domain) PatientRegisterRespons {
 	return PatientRegisterRespons{
 		Message:   "Update Patient Data Success",
 		ID:        domain.ID,
@@ -71,10 +71,10 @@ func FromDomainUpdateDoctor(domain patients.Domain) PatientRegisterRespons {
 		UpdatedAt: domain.UpdatedAt,
 	}
 }
-func FromDoctorListDomain(domain []patients.Domain) []PatientResponse {
+func FromPatientListDomain(domain []patients.Domain) []PatientResponse {
 	var response []PatientResponse
 	for _, value := range domain {
-		response = append(response, FromDomainAllDoctor(value))
+		response = append(response, FromDomainAllPatient(value))
 	}
 	return response
 }

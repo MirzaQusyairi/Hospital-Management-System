@@ -1,6 +1,5 @@
 package patients
 
-
 import (
 	"Hospital-Management-System/business/patients"
 	"time"
@@ -23,19 +22,19 @@ type Patients struct {
 	UpdatedAt             time.Time
 }
 
-func toDomain(ev Patients) patients.Domain {
+func toDomain(ex Patients) patients.Domain {
 	return patients.Domain{
-		ID:                    ev.ID,
-		MedicalPrescriptionID: ev.MedicalPrescriptionID,
-		MedicalRecordID:       ev.MedicalRecordID,
-		Fullname:              ev.Fullname,
-		Address:               ev.Address,
-		Gender:                ev.Gender,
-		NIK:                   ev.NIK,
-		No_Rm:                 ev.No_Rm,
-		DOB:                   ev.DOB,
-		CreatedAt:             ev.CreatedAt,
-		UpdatedAt:             ev.UpdatedAt,
+		ID:                    ex.ID,
+		MedicalPrescriptionID: ex.MedicalPrescriptionID,
+		MedicalRecordID:       ex.MedicalRecordID,
+		Fullname:              ex.Fullname,
+		Address:               ex.Address,
+		Gender:                ex.Gender,
+		NIK:                   ex.NIK,
+		No_Rm:                 ex.No_Rm,
+		DOB:                   ex.DOB,
+		CreatedAt:             ex.CreatedAt,
+		UpdatedAt:             ex.UpdatedAt,
 	}
 }
 
@@ -55,19 +54,19 @@ func fromDomain(domain patients.Domain) Patients {
 	}
 }
 
-func toDomainUpdate(ev Patients) patients.Domain {
+func toDomainUpdate(ex Patients) patients.Domain {
 	return patients.Domain{
-		ID:                    ev.ID,
-		MedicalPrescriptionID: ev.MedicalPrescriptionID,
-		MedicalRecordID:       ev.MedicalRecordID,
-		Fullname:              ev.Fullname,
-		Address:               ev.Address,
-		Gender:                ev.Gender,
-		NIK:                   ev.NIK,
-		No_Rm:                 ev.No_Rm,
-		DOB:                   ev.DOB,
-		CreatedAt:             ev.CreatedAt,
-		UpdatedAt:             ev.UpdatedAt,
+		ID:                    ex.ID,
+		MedicalPrescriptionID: ex.MedicalPrescriptionID,
+		MedicalRecordID:       ex.MedicalRecordID,
+		Fullname:              ex.Fullname,
+		Address:               ex.Address,
+		Gender:                ex.Gender,
+		NIK:                   ex.NIK,
+		No_Rm:                 ex.No_Rm,
+		DOB:                   ex.DOB,
+		CreatedAt:             ex.CreatedAt,
+		UpdatedAt:             ex.UpdatedAt,
 	}
 }
 func toDomainList(data []Patients) []patients.Domain {
