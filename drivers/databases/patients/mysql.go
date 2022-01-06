@@ -31,14 +31,14 @@ func (rep *MysqlPatientRepository) AllPatient() ([]patients.Domain, error) {
 }
 func (rep *MysqlPatientRepository) Register(domain *patients.Domain) (patients.Domain, error) {
 
-	user := fromDomain(*domain)
+	patient := fromDomain(*domain)
 
-	result := rep.Conn.Create(&user)
+	result := rep.Conn.Create(&patient)
 	if result.Error != nil {
 		return patients.Domain{}, result.Error
 	}
 
-	return toDomain(user), nil
+	return toDomain(patient), nil
 }
 
 func (rep *MysqlPatientRepository) Update(patientID int, domain *patients.Domain) (patients.Domain, error) {
