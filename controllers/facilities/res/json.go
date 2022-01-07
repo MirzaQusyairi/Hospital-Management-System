@@ -27,7 +27,7 @@ type UpdateResponse struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 type FaciltyResponse struct {
-	ID        int       `json:"id:"`
+	ID        int       `json:"id"`
 	Name      string    `json:"name"`
 	Queue     int       `json:"queue"`
 	Location  string    `json:"location"`
