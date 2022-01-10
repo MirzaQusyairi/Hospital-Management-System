@@ -6,6 +6,7 @@ import (
 	faciltyDomain "Hospital-Management-System/business/facilities"
 	nurseDomain "Hospital-Management-System/business/nurses"
 	patientDomain "Hospital-Management-System/business/patients"
+	prescriptionDomain "Hospital-Management-System/business/prescriptions"
 	scheduleDomain "Hospital-Management-System/business/schedules"
 
 	adminDB "Hospital-Management-System/drivers/databases/admins"
@@ -13,6 +14,7 @@ import (
 	faciltyDB "Hospital-Management-System/drivers/databases/facilities"
 	nurseDB "Hospital-Management-System/drivers/databases/nurses"
 	patientDB "Hospital-Management-System/drivers/databases/patients"
+	prescriptionDB "Hospital-Management-System/drivers/databases/prescriptions"
 	scheduleDB "Hospital-Management-System/drivers/databases/schedules"
 
 	"gorm.io/gorm"
@@ -40,4 +42,8 @@ func NewFaciltyRepository(conn *gorm.DB) faciltyDomain.Repository {
 
 func NewScheduleRepository(conn *gorm.DB) scheduleDomain.Repository {
 	return scheduleDB.NewMysqlScheduleRepository(conn)
+}
+
+func NewPrescriptionRepository(conn *gorm.DB) prescriptionDomain.Repository {
+	return prescriptionDB.NewMysqlPrescriptionRepository(conn)
 }

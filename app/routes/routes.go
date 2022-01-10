@@ -9,6 +9,7 @@ import (
 	"Hospital-Management-System/controllers/facilities"
 	"Hospital-Management-System/controllers/nurses"
 	"Hospital-Management-System/controllers/patients"
+	"Hospital-Management-System/controllers/prescriptions"
 	"Hospital-Management-System/controllers/schedules"
 	"net/http"
 
@@ -17,12 +18,13 @@ import (
 )
 
 type ControllerList struct {
-	JWTMiddleware      middleware.JWTConfig
-	PatientController  patients.PatientController
-	FaciltyController  facilities.FaciltyController
-	DoctorController   doctors.DoctorController
-	AdminController    admins.AdminController
-	ScheduleController schedules.ScheduleController
+	JWTMiddleware          middleware.JWTConfig
+	PatientController      patients.PatientController
+	FaciltyController      facilities.FaciltyController
+	DoctorController       doctors.DoctorController
+	AdminController        admins.AdminController
+	ScheduleController     schedules.ScheduleController
+	PrescriptionController prescriptions.PrescriptionController
 
 	nurses.NurseController
 }
@@ -32,6 +34,13 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	// Admins
 	e.POST("/api/v1/admins/login", cl.AdminController.Login)
 	e.POST("/api/v1/admins/register", cl.AdminController.Register)
+
+	e.POST("/api/v1/doctors/add/prescription", cl.PrescriptionController.AddPrescription, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationDoctor())
+	e.PUT("/api/v1/doctors/update/prescription/:id", cl.PrescriptionController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationDoctor())
+	e.DELETE("/api/v1/doctors/delete/prescription/:id", cl.PrescriptionController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationDoctor())
+	e.GET("/api/v1/doctors/list/prescription", cl.PrescriptionController.AllPrescription, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationDoctorandNurse())
+	e.GET("/api/v1/doctors/prescription/:id", cl.PrescriptionController.PrescriptionByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationDoctorandNurse())
+	e.GET("/api/v1/doctors/list/prescription/:id", cl.PrescriptionController.PrescriptionByIDSessionBooking, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationDoctorandNurse())
 
 	e.POST("/api/v1/admins/add/schedule", cl.ScheduleController.AddSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/schedule/:id", cl.ScheduleController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
@@ -65,6 +74,9 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 
 	// Doctors
 	e.POST("/api/v1/doctors/login", cl.DoctorController.Login)
+
+	// Nurse
+	e.POST("/api/v1/nurses/login", cl.NurseController.Login)
 }
 
 func RoleValidationAdmin() echo.MiddlewareFunc {
@@ -87,6 +99,34 @@ func RoleValidationDoctor() echo.MiddlewareFunc {
 			claims := middlewareApp.GetUser(c)
 
 			if claims.Role == "doctor" {
+				return hf(c)
+			} else {
+				return controller.NewErrorResponse(c, http.StatusForbidden, business.ErrUnathorized)
+			}
+		}
+	}
+}
+
+func RoleValidationNurse() echo.MiddlewareFunc {
+	return func(hf echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			claims := middlewareApp.GetUser(c)
+
+			if claims.Role == "nurse" {
+				return hf(c)
+			} else {
+				return controller.NewErrorResponse(c, http.StatusForbidden, business.ErrUnathorized)
+			}
+		}
+	}
+}
+
+func RoleValidationDoctorandNurse() echo.MiddlewareFunc {
+	return func(hf echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			claims := middlewareApp.GetUser(c)
+
+			if claims.Role == "doctor" || claims.Role == "nurse" {
 				return hf(c)
 			} else {
 				return controller.NewErrorResponse(c, http.StatusForbidden, business.ErrUnathorized)
