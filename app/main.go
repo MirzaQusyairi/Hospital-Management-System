@@ -29,6 +29,10 @@ import (
 	_scheduleController "Hospital-Management-System/controllers/schedules"
 	_scheduleRepo "Hospital-Management-System/drivers/databases/schedules"
 
+	_prescriptionService "Hospital-Management-System/business/prescriptions"
+	_prescriptionController "Hospital-Management-System/controllers/prescriptions"
+	_prescriptionRepo "Hospital-Management-System/drivers/databases/prescriptions"
+
 	_dbDriver "Hospital-Management-System/drivers/mysql"
 
 	_driverFactory "Hospital-Management-System/drivers"
@@ -60,6 +64,7 @@ func dbMigrate(db *gorm.DB) {
 		&_faciltyRepo.Facilities{},
 		&_patientRepo.Patients{},
 		&_scheduleRepo.Schedules{},
+		&_prescriptionRepo.Prescriptions{},
 
 		&_nurseRepo.Nurses{},
 	)
@@ -111,15 +116,20 @@ func main() {
 	scheduleService := _scheduleService.NewServiceSchedule(scheduleRepo)
 	scheduleCtrl := _scheduleController.NewControllerSchedule(scheduleService)
 
+	prescriptionRepo := _driverFactory.NewPrescriptionRepository(db)
+	prescriptionService := _prescriptionService.NewServicePrescription(prescriptionRepo)
+	prescriptionCtrl := _prescriptionController.NewControllerPrescription(prescriptionService)
+
 	routesInit := _routes.ControllerList{
 		JWTMiddleware: configJWT.Init(),
 
-		AdminController:    *adminCtrl,
-		DoctorController:   *doctorCtrl,
-		PatientController:  *patientCtrl,
-		FaciltyController:  *faciltyCtrl,
-		NurseController:    *nurseCtrl,
-		ScheduleController: *scheduleCtrl,
+		AdminController:        *adminCtrl,
+		DoctorController:       *doctorCtrl,
+		PatientController:      *patientCtrl,
+		FaciltyController:      *faciltyCtrl,
+		NurseController:        *nurseCtrl,
+		ScheduleController:     *scheduleCtrl,
+		PrescriptionController: *prescriptionCtrl,
 	}
 
 	routesInit.RouteRegister(e)
