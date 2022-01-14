@@ -57,8 +57,8 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	e.POST("/api/v1/admins/add/patient", cl.PatientController.Register, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/patient/:id", cl.PatientController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.DELETE("/api/v1/admins/delete/patient/:id", cl.PatientController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
-	e.GET("/api/v1/admins/list/patient", cl.PatientController.AllPatient, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
-	e.GET("/api/v1/admins/patient/:id", cl.PatientController.PatientByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/list/patient", cl.PatientController.AllPatient, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
+	e.GET("/api/v1/admins/patient/:id", cl.PatientController.PatientByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 
 	e.POST("/api/v1/admins/add/doctor", cl.DoctorController.Register, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/doctor/:id", cl.DoctorController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
@@ -77,6 +77,20 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 
 	// Nurse
 	e.POST("/api/v1/nurses/login", cl.NurseController.Login)
+}
+
+func RoleValidationAll() echo.MiddlewareFunc {
+	return func(hf echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			claims := middlewareApp.GetUser(c)
+
+			if claims.Role == "admin" || claims.Role == "doctor" || claims.Role == "nurse" {
+				return hf(c)
+			} else {
+				return controller.NewErrorResponse(c, http.StatusForbidden, business.ErrUnathorized)
+			}
+		}
+	}
 }
 
 func RoleValidationAdmin() echo.MiddlewareFunc {
