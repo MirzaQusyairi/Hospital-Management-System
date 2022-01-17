@@ -5,9 +5,9 @@ import (
 )
 
 type Seschedules struct {
-	IDSchedule string `json:"id_schedule"`
-	IDDoctor   string `json:"id_doctor"`
-	IDFacilty  string `json:"id_facilty"`
+	IDSchedule int `json:"id_schedule"`
+	IDDoctor   int `json:"id_doctor"`
+	IDFacilty  int `json:"id_facilty"`
 }
 
 func (req *Seschedules) ToDomain() *seschedules.Domain {

@@ -8,17 +8,17 @@ import (
 type SessionScheduleRegisterResponse struct {
 	Message    string    `json:"message"`
 	ID         int       `json:"id"`
-	IDSchedule string    `json:"id_schedule"`
-	IDDoctor   string    `json:"id_doctor"`
-	IDFacilty  string    `json:"id_facilty"`
+	IDSchedule int       `json:"id_schedule"`
+	IDDoctor   int       `json:"id_doctor"`
+	IDFacilty  int       `json:"id_facilty"`
 	CreatedAt  time.Time `json:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at"`
 }
 type SessionScheduleResponse struct {
 	ID         int       `json:"id"`
-	IDSchedule string    `json:"id_schedule"`
-	IDDoctor   string    `json:"id_doctor"`
-	IDFacilty  string    `json:"id_facilty"`
+	IDSchedule int       `json:"id_schedule"`
+	IDDoctor   int       `json:"id_doctor"`
+	IDFacilty  int       `json:"id_facilty"`
 	CreatedAt  time.Time `json:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at"`
 }

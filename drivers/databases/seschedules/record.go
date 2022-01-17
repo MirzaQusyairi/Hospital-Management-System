@@ -2,6 +2,9 @@ package seschedules
 
 import (
 	"Hospital-Management-System/business/seschedules"
+	"Hospital-Management-System/drivers/databases/doctors"
+	"Hospital-Management-System/drivers/databases/facilities"
+	"Hospital-Management-System/drivers/databases/schedules"
 	"time"
 
 	"gorm.io/gorm"
@@ -9,20 +12,23 @@ import (
 
 type Sschedules struct {
 	gorm.Model
-	ID         int `gorm:"primary_key"`
-	IDSchedule string
-	IDDoctor   string
-	IDFacilty  string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
+	ID          int `gorm:"primary_key"`
+	SchedulesID int
+	Schedules   schedules.Schedules `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	DoctorsID   int
+	Doctors     doctors.Doctors `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	FacilityID  int
+	Facility    facilities.Facilities `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
 }
 
 func toDomain(ev Sschedules) seschedules.Domain {
 	return seschedules.Domain{
 		ID:         ev.ID,
-		IDSchedule: ev.IDSchedule,
-		IDDoctor:   ev.IDDoctor,
-		IDFacilty:  ev.IDFacilty,
+		IDSchedule: ev.SchedulesID,
+		IDDoctor:   ev.DoctorsID,
+		IDFacilty:  ev.FacilityID,
 		CreatedAt:  ev.CreatedAt,
 		UpdatedAt:  ev.UpdatedAt,
 	}
@@ -32,20 +38,20 @@ func fromDomain(domain seschedules.Domain) Sschedules {
 	return Sschedules{
 		ID: domain.ID,
 
-		IDSchedule: domain.IDSchedule,
-		IDDoctor:   domain.IDDoctor,
-		IDFacilty:  domain.IDFacilty,
-		CreatedAt:  domain.CreatedAt,
-		UpdatedAt:  domain.UpdatedAt,
+		SchedulesID: domain.IDSchedule,
+		DoctorsID:   domain.IDDoctor,
+		FacilityID:  domain.IDFacilty,
+		CreatedAt:   domain.CreatedAt,
+		UpdatedAt:   domain.UpdatedAt,
 	}
 }
 
 func toDomainUpdate(ev Sschedules) seschedules.Domain {
 	return seschedules.Domain{
 		ID:         ev.ID,
-		IDSchedule: ev.IDSchedule,
-		IDDoctor:   ev.IDDoctor,
-		IDFacilty:  ev.IDFacilty,
+		IDSchedule: ev.SchedulesID,
+		IDDoctor:   ev.DoctorsID,
+		IDFacilty:  ev.FacilityID,
 		CreatedAt:  ev.CreatedAt,
 		UpdatedAt:  ev.UpdatedAt,
 	}
