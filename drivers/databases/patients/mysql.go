@@ -67,6 +67,18 @@ func (rep *MysqlPatientRepository) PatientByID(id int) (patients.Domain, error) 
 
 	return toDomain(patient), nil
 }
+func (rep *MysqlPatientRepository) PatientByRM(rm int) (patients.Domain, error) {
+
+	var patient Patients
+
+	result := rep.Conn.Where("no_rm = ?", rm).First(&patient)
+
+	if result.Error != nil {
+		return patients.Domain{}, result.Error
+	}
+
+	return toDomain(patient), nil
+}
 func (rep *MysqlPatientRepository) Delete(id int) (string, error) {
 	rec := Patients{}
 

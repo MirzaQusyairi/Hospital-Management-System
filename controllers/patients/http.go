@@ -13,12 +13,12 @@ import (
 )
 
 type PatientController struct {
-	doctorService patients.Service
+	patientService patients.Service
 }
 
 func NewControllerPatient(serv patients.Service) *PatientController {
 	return &PatientController{
-		doctorService: serv,
+		patientService: serv,
 	}
 }
 
@@ -30,7 +30,7 @@ func (ctrl *PatientController) Register(c echo.Context) error {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
 
-	result, err := ctrl.doctorService.Register(registerReq.ToDomain())
+	result, err := ctrl.patientService.Register(registerReq.ToDomain())
 
 	if err != nil {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
@@ -41,7 +41,7 @@ func (ctrl *PatientController) Register(c echo.Context) error {
 }
 func (ctrl *PatientController) AllPatient(c echo.Context) error {
 
-	result, err := ctrl.doctorService.AllPatient()
+	result, err := ctrl.patientService.AllPatient()
 
 	if err != nil {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
@@ -61,8 +61,8 @@ func (ctrl *PatientController) Update(c echo.Context) error {
 
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	getData, _ := ctrl.doctorService.PatientByID(id)
-	result, err := ctrl.doctorService.Update(id, updateReq.ToDomain())
+	getData, _ := ctrl.patientService.PatientByID(id)
+	result, err := ctrl.patientService.Update(id, updateReq.ToDomain())
 	result.ID = getData.ID
 
 	if err != nil {
@@ -76,7 +76,17 @@ func (ctrl *PatientController) PatientByID(c echo.Context) error {
 
 	itemID, _ := strconv.Atoi(c.Param("id"))
 
-	result, err := ctrl.doctorService.PatientByID(itemID)
+	result, err := ctrl.patientService.PatientByID(itemID)
+	if err != nil {
+		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
+	}
+	return controllers.NewSuccessResponse(c, response.FromDomainAllPatient(result))
+}
+func (ctrl *PatientController) PatientByRM(c echo.Context) error {
+
+	noRM, _ := strconv.Atoi(c.Param("no_rm"))
+
+	result, err := ctrl.patientService.PatientByID(noRM)
 	if err != nil {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
@@ -86,7 +96,7 @@ func (ctrl *PatientController) Delete(c echo.Context) error {
 
 	deletedId, _ := strconv.Atoi(c.Param("id"))
 
-	result, err := ctrl.doctorService.Delete(deletedId)
+	result, err := ctrl.patientService.Delete(deletedId)
 
 	if err != nil {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)

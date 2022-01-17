@@ -65,6 +65,7 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	e.POST("/api/v1/admins/add/patient", cl.PatientController.Register, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/patient/:id", cl.PatientController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.DELETE("/api/v1/admins/delete/patient/:id", cl.PatientController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/patient/by/:no_rm", cl.PatientController.PatientByRM, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.GET("/api/v1/admins/list/patient", cl.PatientController.AllPatient, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 	e.GET("/api/v1/admins/patient/:id", cl.PatientController.PatientByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 
