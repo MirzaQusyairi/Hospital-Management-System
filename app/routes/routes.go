@@ -11,6 +11,7 @@ import (
 	"Hospital-Management-System/controllers/patients"
 	"Hospital-Management-System/controllers/prescriptions"
 	"Hospital-Management-System/controllers/schedules"
+	"Hospital-Management-System/controllers/seschedules"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -18,13 +19,14 @@ import (
 )
 
 type ControllerList struct {
-	JWTMiddleware          middleware.JWTConfig
-	PatientController      patients.PatientController
-	FaciltyController      facilities.FaciltyController
-	DoctorController       doctors.DoctorController
-	AdminController        admins.AdminController
-	ScheduleController     schedules.ScheduleController
-	PrescriptionController prescriptions.PrescriptionController
+	JWTMiddleware             middleware.JWTConfig
+	PatientController         patients.PatientController
+	FaciltyController         facilities.FaciltyController
+	DoctorController          doctors.DoctorController
+	AdminController           admins.AdminController
+	ScheduleController        schedules.ScheduleController
+	SessionScheduleController seschedules.SessionScheduleController
+	PrescriptionController    prescriptions.PrescriptionController
 
 	nurses.NurseController
 }
@@ -48,6 +50,12 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	e.GET("/api/v1/admins/list/schedule", cl.ScheduleController.AllSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.GET("/api/v1/admins/schedule/:id", cl.ScheduleController.ScheduleByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 
+	e.POST("/api/v1/admins/add/sessionschedule", cl.SessionScheduleController.AddSessionSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.PUT("/api/v1/admins/update/sessionschedule/:id", cl.SessionScheduleController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.DELETE("/api/v1/admins/delete/sessionschedule/:id", cl.SessionScheduleController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/list/sessionschedule", cl.SessionScheduleController.AllSessionSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/sessionschedule/:id", cl.SessionScheduleController.SessionScheduleByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+
 	e.POST("/api/v1/admins/add/facilty", cl.FaciltyController.AddFacilty, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/facilty/:id", cl.FaciltyController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.DELETE("/api/v1/admins/delete/facilty/:id", cl.FaciltyController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
@@ -57,6 +65,7 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	e.POST("/api/v1/admins/add/patient", cl.PatientController.Register, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/patient/:id", cl.PatientController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.DELETE("/api/v1/admins/delete/patient/:id", cl.PatientController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/patient/by/:no_rm", cl.PatientController.PatientByRM, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.GET("/api/v1/admins/list/patient", cl.PatientController.AllPatient, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 	e.GET("/api/v1/admins/patient/:id", cl.PatientController.PatientByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 

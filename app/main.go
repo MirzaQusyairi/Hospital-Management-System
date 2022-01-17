@@ -33,6 +33,10 @@ import (
 	_prescriptionController "Hospital-Management-System/controllers/prescriptions"
 	_prescriptionRepo "Hospital-Management-System/drivers/databases/prescriptions"
 
+	_sesScheduleService "Hospital-Management-System/business/seschedules"
+	_sesScheduleController "Hospital-Management-System/controllers/seschedules"
+	_sesScheduleRepo "Hospital-Management-System/drivers/databases/seschedules"
+
 	_dbDriver "Hospital-Management-System/drivers/mysql"
 
 	_driverFactory "Hospital-Management-System/drivers"
@@ -65,7 +69,7 @@ func dbMigrate(db *gorm.DB) {
 		&_patientRepo.Patients{},
 		&_scheduleRepo.Schedules{},
 		&_prescriptionRepo.Prescriptions{},
-
+		&_sesScheduleRepo.Sschedules{},
 		&_nurseRepo.Nurses{},
 	)
 }
@@ -116,6 +120,10 @@ func main() {
 	scheduleService := _scheduleService.NewServiceSchedule(scheduleRepo)
 	scheduleCtrl := _scheduleController.NewControllerSchedule(scheduleService)
 
+	sessionscheduleRepo := _driverFactory.NewSescheduleRepository(db)
+	sessionscheduleService := _sesScheduleService.NewServiceSessionSchedule(sessionscheduleRepo)
+	sessionscheduleCtrl := _sesScheduleController.NewControllerSessionSchedule(sessionscheduleService)
+
 	prescriptionRepo := _driverFactory.NewPrescriptionRepository(db)
 	prescriptionService := _prescriptionService.NewServicePrescription(prescriptionRepo)
 	prescriptionCtrl := _prescriptionController.NewControllerPrescription(prescriptionService)
@@ -123,13 +131,14 @@ func main() {
 	routesInit := _routes.ControllerList{
 		JWTMiddleware: configJWT.Init(),
 
-		AdminController:        *adminCtrl,
-		DoctorController:       *doctorCtrl,
-		PatientController:      *patientCtrl,
-		FaciltyController:      *faciltyCtrl,
-		NurseController:        *nurseCtrl,
-		ScheduleController:     *scheduleCtrl,
-		PrescriptionController: *prescriptionCtrl,
+		AdminController:           *adminCtrl,
+		DoctorController:          *doctorCtrl,
+		PatientController:         *patientCtrl,
+		FaciltyController:         *faciltyCtrl,
+		NurseController:           *nurseCtrl,
+		ScheduleController:        *scheduleCtrl,
+		PrescriptionController:    *prescriptionCtrl,
+		SessionScheduleController: *sessionscheduleCtrl,
 	}
 
 	routesInit.RouteRegister(e)

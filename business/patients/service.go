@@ -1,6 +1,5 @@
 package patients
 
-
 import (
 	"Hospital-Management-System/business"
 )
@@ -55,6 +54,16 @@ func (serv *servicePatient) PatientByID(id int) (Domain, error) {
 
 	return result, nil
 }
+func (serv *servicePatient) PatientByRM(rm int) (Domain, error) {
+
+	result, err := serv.patientRepository.PatientByRM(rm)
+
+	if err != nil {
+		return Domain{}, err
+	}
+
+	return result, nil
+}
 func (serv *servicePatient) Delete(id int) (string, error) {
 
 	result, err := serv.patientRepository.Delete(id)
@@ -65,4 +74,3 @@ func (serv *servicePatient) Delete(id int) (string, error) {
 
 	return result, nil
 }
-
