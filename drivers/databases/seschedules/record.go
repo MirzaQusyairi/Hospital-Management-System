@@ -14,11 +14,11 @@ type Sschedules struct {
 	gorm.Model
 	ID          int `gorm:"primary_key"`
 	SchedulesID int
-	Schedules   schedules.Schedules `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Schedules   schedules.Schedules `gorm:"constraint:NO ACTION:CASCADE,OnDelete:NO ACTION;"`
 	DoctorsID   int
-	Doctors     doctors.Doctors `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Doctors     doctors.Doctors `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
 	FacilityID  int
-	Facility    facilities.Facilities `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Facility    facilities.Facilities `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }
