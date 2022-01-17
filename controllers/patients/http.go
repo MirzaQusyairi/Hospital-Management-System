@@ -82,17 +82,16 @@ func (ctrl *PatientController) PatientByID(c echo.Context) error {
 	}
 	return controllers.NewSuccessResponse(c, response.FromDomainAllPatient(result))
 }
+func (ctrl *PatientController) PatientByRM(c echo.Context) error {
 
-// func (ctrl *PatientController) PatientByRM(c echo.Context) error {
+	noRM, _ := strconv.Atoi(c.Param("no_rm"))
 
-// 	noRM, _ := strconv.Atoi(c.Param("no_rm"))
-
-// 	result, err := ctrl.patientService.PatientByID(noRM)
-// 	if err != nil {
-// 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
-// 	}
-// 	return controllers.NewSuccessResponse(c, response.FromDomainAllPatient(result))
-// }
+	result, err := ctrl.patientService.PatientByID(noRM)
+	if err != nil {
+		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
+	}
+	return controllers.NewSuccessResponse(c, response.FromDomainAllPatient(result))
+}
 func (ctrl *PatientController) Delete(c echo.Context) error {
 
 	deletedId, _ := strconv.Atoi(c.Param("id"))
