@@ -1,12 +1,14 @@
 package seschedules
 
-import "time"
+import (
+	"time"
+)
 
 type Domain struct {
 	ID         int
-	IDSchedule string
-	IDDoctor   string
-	IDFacilty  string
+	IDSchedule int
+	IDDoctor   int
+	IDFacilty  int
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
 }
