@@ -59,7 +59,21 @@ func (serv *serviceSessionSchedule) AddSessionSchedule(domain *Domain) (Domain, 
 }
 
 func (serv *serviceSessionSchedule) Update(schID int, domain *Domain) (Domain, error) {
-
+	resultFacilities, err := serv.FacilitiesRepository.FacByID(domain.IDFacilty)
+	if err != nil {
+		return Domain{}, err
+	}
+	domain.IDFacilty = resultFacilities.ID
+	resultDoctors, err := serv.DoctorsRepository.DoctorByID(domain.IDDoctor)
+	if err != nil {
+		return Domain{}, err
+	}
+	domain.IDDoctor = resultDoctors.ID
+	resultSchedules, err := serv.SchedulesRepository.ScheduleByID(domain.IDSchedule)
+	if err != nil {
+		return Domain{}, err
+	}
+	domain.IDSchedule = resultSchedules.ID
 	result, err := serv.SessionScheduleRepository.Update(schID, domain)
 
 	if err != nil {
