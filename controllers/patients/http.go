@@ -86,7 +86,7 @@ func (ctrl *PatientController) PatientByRM(c echo.Context) error {
 
 	noRM, _ := strconv.Atoi(c.Param("no_rm"))
 
-	result, err := ctrl.patientService.PatientByID(noRM)
+	result, err := ctrl.patientService.PatientByRM(noRM)
 	if err != nil {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
