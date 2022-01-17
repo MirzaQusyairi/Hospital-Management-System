@@ -17,7 +17,7 @@ type PrescriptionRegisterResponse struct {
 	UpdatedAt        time.Time `json:"updated_at"`
 }
 type PrescriptionResponse struct {
-	ID               int       `json:"id:"`
+	ID               int       `json:"id"`
 	MedicineName     string    `json:"medicine_name"`
 	MedicationRules  string    `json:"medication_rules"`
 	IDPatient        string    `json:"id_patient"`
