@@ -8,6 +8,7 @@ import (
 	patientDomain "Hospital-Management-System/business/patients"
 	prescriptionDomain "Hospital-Management-System/business/prescriptions"
 	scheduleDomain "Hospital-Management-System/business/schedules"
+	sesbookDomain "Hospital-Management-System/business/sesbooks"
 	sescheduleDomain "Hospital-Management-System/business/seschedules"
 
 	adminDB "Hospital-Management-System/drivers/databases/admins"
@@ -17,6 +18,7 @@ import (
 	patientDB "Hospital-Management-System/drivers/databases/patients"
 	prescriptionDB "Hospital-Management-System/drivers/databases/prescriptions"
 	scheduleDB "Hospital-Management-System/drivers/databases/schedules"
+	sesbookDB "Hospital-Management-System/drivers/databases/sesbooks"
 	sescheduleDB "Hospital-Management-System/drivers/databases/seschedules"
 
 	"gorm.io/gorm"
@@ -51,4 +53,7 @@ func NewPrescriptionRepository(conn *gorm.DB) prescriptionDomain.Repository {
 }
 func NewSescheduleRepository(conn *gorm.DB) sescheduleDomain.Repository {
 	return sescheduleDB.NewMysqlSscheduleRepository(conn)
+}
+func NewSesbookRepository(conn *gorm.DB) sesbookDomain.Repository {
+	return sesbookDB.NewMysqlSesbooksRepository(conn)
 }

@@ -82,7 +82,7 @@ func (ctrl *SessionScheduleController) SessionScheduleByID(c echo.Context) error
 	if err != nil {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
-	return controllers.NewSuccessResponse(c, response.FromDomainAllPrescription(result))
+	return controllers.NewSuccessResponse(c, response.FromDomainAllSessionSchedule(result))
 }
 
 func (ctrl *SessionScheduleController) SessionScheduleByIDSchedule(c echo.Context) error {
