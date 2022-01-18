@@ -6,9 +6,9 @@ type Domain struct {
 	ID               int
 	MedicineName     string
 	MedicationRules  string
-	IDPatient        string
-	IDDoctor         string
-	IDSessionBooking string
+	PatientsID       int
+	DoctorID         int
+	SessionBookingID int
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }

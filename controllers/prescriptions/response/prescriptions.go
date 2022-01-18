@@ -10,9 +10,9 @@ type PrescriptionRegisterResponse struct {
 	ID               int       `json:"id"`
 	MedicineName     string    `json:"medicine_name"`
 	MedicationRules  string    `json:"medication_rules"`
-	IDPatient        string    `json:"id_patient"`
-	IDDoctor         string    `json:"id_doctor"`
-	IDSessionBooking string    `json:"id_sessionbooking"`
+	PatientsID       int       `json:"id_patient"`
+	DoctorID         int       `json:"id_doctor"`
+	SessionBookingID int       `json:"id_sessionbooking"`
 	CreatedAt        time.Time `json:"created_at"`
 	UpdatedAt        time.Time `json:"updated_at"`
 }
@@ -20,9 +20,9 @@ type PrescriptionResponse struct {
 	ID               int       `json:"id"`
 	MedicineName     string    `json:"medicine_name"`
 	MedicationRules  string    `json:"medication_rules"`
-	IDPatient        string    `json:"id_patient"`
-	IDDoctor         string    `json:"id_doctor"`
-	IDSessionBooking string    `json:"id_sessionbooking"`
+	PatientsID       int       `json:"id_patient"`
+	DoctorID         int       `json:"id_doctor"`
+	SessionBookingID int       `json:"id_sessionbooking"`
 	CreatedAt        time.Time `json:"created_at"`
 	UpdatedAt        time.Time `json:"updated_at"`
 }
@@ -33,9 +33,9 @@ func FromDomainRegister(domain prescriptions.Domain) PrescriptionRegisterRespons
 		ID:               domain.ID,
 		MedicineName:     domain.MedicineName,
 		MedicationRules:  domain.MedicationRules,
-		IDPatient:        domain.IDPatient,
-		IDDoctor:         domain.IDDoctor,
-		IDSessionBooking: domain.IDSessionBooking,
+		PatientsID:       domain.PatientsID,
+		DoctorID:         domain.DoctorID,
+		SessionBookingID: domain.SessionBookingID,
 		CreatedAt:        domain.CreatedAt,
 		UpdatedAt:        domain.UpdatedAt,
 	}
@@ -46,9 +46,9 @@ func FromDomainAllPrescription(domain prescriptions.Domain) PrescriptionResponse
 		ID:               domain.ID,
 		MedicineName:     domain.MedicineName,
 		MedicationRules:  domain.MedicationRules,
-		IDPatient:        domain.IDPatient,
-		IDDoctor:         domain.IDDoctor,
-		IDSessionBooking: domain.IDSessionBooking,
+		PatientsID:       domain.PatientsID,
+		DoctorID:         domain.DoctorID,
+		SessionBookingID: domain.SessionBookingID,
 		CreatedAt:        domain.CreatedAt,
 		UpdatedAt:        domain.UpdatedAt,
 	}
@@ -60,9 +60,9 @@ func FromDomainUpdatePrescription(domain prescriptions.Domain) PrescriptionRegis
 		ID:               domain.ID,
 		MedicineName:     domain.MedicineName,
 		MedicationRules:  domain.MedicationRules,
-		IDPatient:        domain.IDPatient,
-		IDDoctor:         domain.IDDoctor,
-		IDSessionBooking: domain.IDSessionBooking,
+		PatientsID:       domain.PatientsID,
+		DoctorID:         domain.DoctorID,
+		SessionBookingID: domain.SessionBookingID,
 		CreatedAt:        domain.CreatedAt,
 		UpdatedAt:        domain.UpdatedAt,
 	}

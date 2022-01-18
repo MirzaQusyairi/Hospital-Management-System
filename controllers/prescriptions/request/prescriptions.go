@@ -7,17 +7,17 @@ import (
 type Prescriptions struct {
 	MedicineName     string `json:"medicine_name"`
 	MedicationRules  string `json:"medication_rules"`
-	IDPatient        string `json:"id_patient"`
-	IDDoctor         string `json:"id_doctor"`
-	IDSessionBooking string `json:"id_sessionbooking"`
+	PatientsID       int    `json:"id_patient"`
+	DoctorID         int    `json:"id_doctor"`
+	SessionBookingID int    `json:"id_sessionbooking"`
 }
 
 func (req *Prescriptions) ToDomain() *prescriptions.Domain {
 	return &prescriptions.Domain{
 		MedicineName:     req.MedicineName,
 		MedicationRules:  req.MedicationRules,
-		IDPatient:        req.IDPatient,
-		IDDoctor:         req.IDDoctor,
-		IDSessionBooking: req.IDSessionBooking,
+		PatientsID:       req.PatientsID,
+		DoctorID:         req.DoctorID,
+		SessionBookingID: req.SessionBookingID,
 	}
 }
