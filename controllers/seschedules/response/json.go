@@ -35,7 +35,7 @@ func FromDomainRegister(domain seschedules.Domain) SessionScheduleRegisterRespon
 	}
 }
 
-func FromDomainAllPrescription(domain seschedules.Domain) SessionScheduleResponse {
+func FromDomainAllSessionSchedule(domain seschedules.Domain) SessionScheduleResponse {
 	return SessionScheduleResponse{
 		ID:         domain.ID,
 		IDSchedule: domain.IDSchedule,
@@ -61,7 +61,7 @@ func FromDomainUpdateSessionSchedule(domain seschedules.Domain) SessionScheduleR
 func FromSessionScheduleListDomain(domain []seschedules.Domain) []SessionScheduleResponse {
 	var response []SessionScheduleResponse
 	for _, value := range domain {
-		response = append(response, FromDomainAllPrescription(value))
+		response = append(response, FromDomainAllSessionSchedule(value))
 	}
 	return response
 }

@@ -11,6 +11,7 @@ import (
 	"Hospital-Management-System/controllers/patients"
 	"Hospital-Management-System/controllers/prescriptions"
 	"Hospital-Management-System/controllers/schedules"
+	"Hospital-Management-System/controllers/sesbooks"
 	"Hospital-Management-System/controllers/seschedules"
 	"net/http"
 
@@ -27,6 +28,7 @@ type ControllerList struct {
 	ScheduleController        schedules.ScheduleController
 	SessionScheduleController seschedules.SessionScheduleController
 	PrescriptionController    prescriptions.PrescriptionController
+	SesbookController         sesbooks.SesbookController
 
 	nurses.NurseController
 }
@@ -81,6 +83,11 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	e.GET("/api/v1/admins/list/nurse", cl.NurseController.AllNurse, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.GET("/api/v1/admins/nurse/:id", cl.NurseController.NurseByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdminandNurse())
 
+	e.POST("/api/v1/admins/add/sessionbook", cl.SesbookController.AddSessionBook, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.PUT("/api/v1/admins/update/sessionbook/:id", cl.SesbookController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.DELETE("/api/v1/admins/delete/sessionbook/:id", cl.SesbookController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/list/sessionbook", cl.SesbookController.AllSessionBook, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/sessionbook/:id", cl.SesbookController.SessionBookByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	// Doctors
 	e.POST("/api/v1/doctors/login", cl.DoctorController.Login)
 

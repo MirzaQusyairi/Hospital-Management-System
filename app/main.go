@@ -37,6 +37,10 @@ import (
 	_sesScheduleController "Hospital-Management-System/controllers/seschedules"
 	_sesScheduleRepo "Hospital-Management-System/drivers/databases/seschedules"
 
+	_sesbookService "Hospital-Management-System/business/sesbooks"
+	_sesbookController "Hospital-Management-System/controllers/sesbooks"
+	_sesbookRepo "Hospital-Management-System/drivers/databases/sesbooks"
+
 	_dbDriver "Hospital-Management-System/drivers/mysql"
 
 	_driverFactory "Hospital-Management-System/drivers"
@@ -71,6 +75,7 @@ func dbMigrate(db *gorm.DB) {
 		&_prescriptionRepo.Prescriptions{},
 		&_sesScheduleRepo.Sschedules{},
 		&_nurseRepo.Nurses{},
+		&_sesbookRepo.Sesbooks{},
 	)
 }
 
@@ -128,6 +133,10 @@ func main() {
 	prescriptionService := _prescriptionService.NewServicePrescription(prescriptionRepo)
 	prescriptionCtrl := _prescriptionController.NewControllerPrescription(prescriptionService)
 
+	sesbookRepo := _driverFactory.NewSesbookRepository(db)
+	sesbookService := _sesbookService.NewServiceSesbook(sesbookRepo)
+	sesbookCtrl := _sesbookController.NewControllerSesbook(sesbookService)
+
 	routesInit := _routes.ControllerList{
 		JWTMiddleware: configJWT.Init(),
 
@@ -139,6 +148,7 @@ func main() {
 		ScheduleController:        *scheduleCtrl,
 		PrescriptionController:    *prescriptionCtrl,
 		SessionScheduleController: *sessionscheduleCtrl,
+		SesbookController:         *sesbookCtrl,
 	}
 
 	routesInit.RouteRegister(e)
