@@ -2,16 +2,22 @@ package sesbooks
 
 import (
 	"Hospital-Management-System/business"
+	"Hospital-Management-System/business/patients"
+	"Hospital-Management-System/business/seschedules"
 	"time"
 )
 
 type serviceSesbook struct {
-	sesbookRepository Repository
+	sesbookRepository        Repository
+	PatientsRepository       patients.Repository
+	SessionScheduleRepositry seschedules.Repository
 }
 
-func NewServiceSesbook(repoSesbook Repository) Service {
+func NewServiceSesbook(repoSesbook Repository, repoPatients patients.Repository, repoSessionSchedule seschedules.Repository) Service {
 	return &serviceSesbook{
-		sesbookRepository: repoSesbook,
+		sesbookRepository:        repoSesbook,
+		PatientsRepository:       repoPatients,
+		SessionScheduleRepositry: repoSessionSchedule,
 	}
 }
 
@@ -27,6 +33,16 @@ func (serv *serviceSesbook) AllSessionBook() ([]Domain, error) {
 }
 
 func (serv *serviceSesbook) AddSessionBook(domain *Domain) (Domain, error) {
+	resultPatients, err := serv.PatientsRepository.PatientByID(domain.IDPatient)
+	if err != nil {
+		return Domain{}, err
+	}
+	domain.IDPatient = resultPatients.ID
+	resultSessionSchedule, err := serv.SessionScheduleRepositry.SessionScheduleByID(domain.IDSessionSchedule)
+	if err != nil {
+		return Domain{}, err
+	}
+	domain.IDSessionSchedule = resultSessionSchedule.ID
 	dateNow := time.Now()
 	domain.Date = dateNow
 	result, err := serv.sesbookRepository.AddSessionBook(domain)

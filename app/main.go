@@ -134,7 +134,7 @@ func main() {
 	prescriptionCtrl := _prescriptionController.NewControllerPrescription(prescriptionService)
 
 	sesbookRepo := _driverFactory.NewSesbookRepository(db)
-	sesbookService := _sesbookService.NewServiceSesbook(sesbookRepo)
+	sesbookService := _sesbookService.NewServiceSesbook(sesbookRepo, patientRepo, sessionscheduleRepo)
 	sesbookCtrl := _sesbookController.NewControllerSesbook(sesbookService)
 
 	routesInit := _routes.ControllerList{
