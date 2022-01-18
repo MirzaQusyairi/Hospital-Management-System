@@ -2,6 +2,9 @@ package prescriptions
 
 import (
 	"Hospital-Management-System/business/prescriptions"
+	"Hospital-Management-System/drivers/databases/doctors"
+	"Hospital-Management-System/drivers/databases/patients"
+	"Hospital-Management-System/drivers/databases/sesbooks"
 	"time"
 
 	"gorm.io/gorm"
@@ -12,9 +15,12 @@ type Prescriptions struct {
 	ID               int `gorm:"primary_key"`
 	MedicineName     string
 	MedicationRules  string
-	IDPatient        string
-	IDDoctor         string
-	IDSessionBooking string
+	PatientsID       int
+	Patients         patients.Patients `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
+	DoctorID         int
+	Doctors          doctors.Doctors `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
+	SessionBookingID int
+	Sesbooks         sesbooks.Sesbooks `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }
@@ -24,9 +30,9 @@ func toDomain(ev Prescriptions) prescriptions.Domain {
 		ID:               ev.ID,
 		MedicineName:     ev.MedicineName,
 		MedicationRules:  ev.MedicationRules,
-		IDPatient:        ev.IDPatient,
-		IDDoctor:         ev.IDDoctor,
-		IDSessionBooking: ev.IDSessionBooking,
+		PatientsID:       ev.PatientsID,
+		DoctorID:         ev.DoctorID,
+		SessionBookingID: ev.SessionBookingID,
 		CreatedAt:        ev.CreatedAt,
 		UpdatedAt:        ev.UpdatedAt,
 	}
@@ -37,9 +43,9 @@ func fromDomain(domain prescriptions.Domain) Prescriptions {
 		ID:               domain.ID,
 		MedicineName:     domain.MedicineName,
 		MedicationRules:  domain.MedicationRules,
-		IDPatient:        domain.IDPatient,
-		IDDoctor:         domain.IDDoctor,
-		IDSessionBooking: domain.IDSessionBooking,
+		PatientsID:       domain.PatientsID,
+		DoctorID:         domain.DoctorID,
+		SessionBookingID: domain.SessionBookingID,
 		CreatedAt:        domain.CreatedAt,
 		UpdatedAt:        domain.UpdatedAt,
 	}
@@ -50,9 +56,9 @@ func toDomainUpdate(ev Prescriptions) prescriptions.Domain {
 		ID:               ev.ID,
 		MedicineName:     ev.MedicineName,
 		MedicationRules:  ev.MedicationRules,
-		IDPatient:        ev.IDPatient,
-		IDDoctor:         ev.IDDoctor,
-		IDSessionBooking: ev.IDSessionBooking,
+		PatientsID:       ev.PatientsID,
+		DoctorID:         ev.DoctorID,
+		SessionBookingID: ev.SessionBookingID,
 		CreatedAt:        ev.CreatedAt,
 		UpdatedAt:        ev.UpdatedAt,
 	}

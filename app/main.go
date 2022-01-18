@@ -129,13 +129,13 @@ func main() {
 	sessionscheduleService := _sesScheduleService.NewServiceSessionSchedule(sessionscheduleRepo, faciltyRepo, doctorRepo, scheduleRepo)
 	sessionscheduleCtrl := _sesScheduleController.NewControllerSessionSchedule(sessionscheduleService)
 
-	prescriptionRepo := _driverFactory.NewPrescriptionRepository(db)
-	prescriptionService := _prescriptionService.NewServicePrescription(prescriptionRepo)
-	prescriptionCtrl := _prescriptionController.NewControllerPrescription(prescriptionService)
-
 	sesbookRepo := _driverFactory.NewSesbookRepository(db)
 	sesbookService := _sesbookService.NewServiceSesbook(sesbookRepo, patientRepo, sessionscheduleRepo)
 	sesbookCtrl := _sesbookController.NewControllerSesbook(sesbookService)
+
+	prescriptionRepo := _driverFactory.NewPrescriptionRepository(db)
+	prescriptionService := _prescriptionService.NewServicePrescription(prescriptionRepo, patientRepo, doctorRepo, sesbookRepo)
+	prescriptionCtrl := _prescriptionController.NewControllerPrescription(prescriptionService)
 
 	routesInit := _routes.ControllerList{
 		JWTMiddleware: configJWT.Init(),

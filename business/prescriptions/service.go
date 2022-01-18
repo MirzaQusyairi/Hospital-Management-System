@@ -2,15 +2,24 @@ package prescriptions
 
 import (
 	"Hospital-Management-System/business"
+	"Hospital-Management-System/business/doctors"
+	"Hospital-Management-System/business/patients"
+	"Hospital-Management-System/business/sesbooks"
 )
 
 type servicePrescription struct {
 	prescriptionRepository Repository
+	patientRepository      patients.Repository
+	doctorRepository       doctors.Repository
+	sesbookRepository      sesbooks.Repository
 }
 
-func NewServicePrescription(repoPrescription Repository) Service {
+func NewServicePrescription(repoPrescription Repository, repoPatients patients.Repository, repoDoctors doctors.Repository, repoSesbook sesbooks.Repository) Service {
 	return &servicePrescription{
 		prescriptionRepository: repoPrescription,
+		patientRepository:      repoPatients,
+		doctorRepository:       repoDoctors,
+		sesbookRepository:      repoSesbook,
 	}
 }
 
@@ -26,7 +35,21 @@ func (serv *servicePrescription) AllPrescription() ([]Domain, error) {
 }
 
 func (serv *servicePrescription) AddPrescription(domain *Domain) (Domain, error) {
-
+	resultPatients, err := serv.patientRepository.PatientByID(domain.PatientsID)
+	if err != nil {
+		return Domain{}, err
+	}
+	domain.PatientsID = resultPatients.ID
+	resultDoctors, err := serv.doctorRepository.DoctorByID(domain.DoctorID)
+	if err != nil {
+		return Domain{}, err
+	}
+	domain.DoctorID = resultDoctors.ID
+	resultSesbook, err := serv.sesbookRepository.SessionBookByID(domain.SessionBookingID)
+	if err != nil {
+		return Domain{}, err
+	}
+	domain.SessionBookingID = resultSesbook.ID
 	result, err := serv.prescriptionRepository.AddPrescription(domain)
 
 	if err != nil {
