@@ -83,9 +83,7 @@ func (ctrl *PatientController) PatientByID(c echo.Context) error {
 	return controllers.NewSuccessResponse(c, response.FromDomainAllPatient(result))
 }
 func (ctrl *PatientController) PatientByRM(c echo.Context) error {
-
-	rm, _ := strconv.Atoi(c.Param("no_rm"))
-
+	rm := c.QueryParam("no_rm")
 	result, err := ctrl.patientService.PatientByRM(rm)
 	if err != nil {
 		return controllers.NewErrorResponse(c, http.StatusBadRequest, err)

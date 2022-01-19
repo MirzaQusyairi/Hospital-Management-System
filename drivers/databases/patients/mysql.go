@@ -67,11 +67,11 @@ func (rep *MysqlPatientRepository) PatientByID(id int) (patients.Domain, error) 
 
 	return toDomain(patient), nil
 }
-func (rep *MysqlPatientRepository) PatientByRM(rm int) (patients.Domain, error) {
+func (rep *MysqlPatientRepository) PatientByRM(rm string) (patients.Domain, error) {
 
 	var patient Patients
 
-	result := rep.Conn.Where("no_rm = ?", rm).First(&patient)
+	result := rep.Conn.Where("no_rm LIKE ?", rm).First(&patient)
 
 	if result.Error != nil {
 		return patients.Domain{}, result.Error

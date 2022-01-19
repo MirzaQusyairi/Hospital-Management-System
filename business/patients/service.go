@@ -54,7 +54,7 @@ func (serv *servicePatient) PatientByID(id int) (Domain, error) {
 
 	return result, nil
 }
-func (serv *servicePatient) PatientByRM(rm int) (Domain, error) {
+func (serv *servicePatient) PatientByRM(rm string) (Domain, error) {
 
 	result, err := serv.patientRepository.PatientByRM(rm)
 
