@@ -17,10 +17,10 @@ type Prescriptions struct {
 	MedicationRules  string
 	PatientsID       int
 	Patients         patients.Patients `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
-	DoctorID         int
+	DoctorsID        int
 	Doctors          doctors.Doctors `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
 	SessionBookingID int
-	Sesbooks         sesbooks.Sesbooks `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
+	SessionBooking   sesbooks.Sesbooks `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }
@@ -31,7 +31,7 @@ func toDomain(ev Prescriptions) prescriptions.Domain {
 		MedicineName:     ev.MedicineName,
 		MedicationRules:  ev.MedicationRules,
 		PatientsID:       ev.PatientsID,
-		DoctorID:         ev.DoctorID,
+		DoctorID:         ev.DoctorsID,
 		SessionBookingID: ev.SessionBookingID,
 		CreatedAt:        ev.CreatedAt,
 		UpdatedAt:        ev.UpdatedAt,
@@ -44,7 +44,7 @@ func fromDomain(domain prescriptions.Domain) Prescriptions {
 		MedicineName:     domain.MedicineName,
 		MedicationRules:  domain.MedicationRules,
 		PatientsID:       domain.PatientsID,
-		DoctorID:         domain.DoctorID,
+		DoctorsID:        domain.DoctorID,
 		SessionBookingID: domain.SessionBookingID,
 		CreatedAt:        domain.CreatedAt,
 		UpdatedAt:        domain.UpdatedAt,
@@ -57,7 +57,7 @@ func toDomainUpdate(ev Prescriptions) prescriptions.Domain {
 		MedicineName:     ev.MedicineName,
 		MedicationRules:  ev.MedicationRules,
 		PatientsID:       ev.PatientsID,
-		DoctorID:         ev.DoctorID,
+		DoctorID:         ev.DoctorsID,
 		SessionBookingID: ev.SessionBookingID,
 		CreatedAt:        ev.CreatedAt,
 		UpdatedAt:        ev.UpdatedAt,
