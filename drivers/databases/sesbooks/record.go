@@ -17,6 +17,7 @@ type Sesbooks struct {
 	SessionScheduleID int
 	SessionSchedule   seschedules.Sschedules `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
 	PatientQueue      int
+	Status            string
 	Date              time.Time
 	CreatedAt         time.Time
 	UpdatedAt         time.Time
@@ -29,6 +30,7 @@ func toDomain(ev Sesbooks) sesbooks.Domain {
 		IDSessionSchedule: ev.SessionScheduleID,
 		PatientQueue:      ev.PatientQueue,
 		Date:              ev.Date,
+		Status:            ev.Status,
 		CreatedAt:         ev.CreatedAt,
 		UpdatedAt:         ev.UpdatedAt,
 	}
@@ -41,6 +43,7 @@ func fromDomain(domain sesbooks.Domain) Sesbooks {
 		SessionScheduleID: domain.IDSessionSchedule,
 		PatientQueue:      domain.PatientQueue,
 		Date:              domain.Date,
+		Status:            domain.Status,
 		CreatedAt:         domain.CreatedAt,
 		UpdatedAt:         domain.UpdatedAt,
 	}
@@ -53,6 +56,7 @@ func toDomainUpdate(ev Sesbooks) sesbooks.Domain {
 		IDSessionSchedule: ev.SessionScheduleID,
 		PatientQueue:      ev.PatientQueue,
 		Date:              ev.Date,
+		Status:            ev.Status,
 		CreatedAt:         ev.CreatedAt,
 		UpdatedAt:         ev.UpdatedAt,
 	}

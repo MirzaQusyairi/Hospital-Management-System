@@ -5,9 +5,10 @@ import (
 )
 
 type Sesbooks struct {
-	IDPatient         int `json:"id_patient"`
-	IDSessionSchedule int `json:"id_session_schedule"`
-	PatientQueue      int `json:"patient_queue"`
+	IDPatient         int    `json:"id_patient"`
+	IDSessionSchedule int    `json:"id_session_schedule"`
+	PatientQueue      int    `json:"patient_queue"`
+	Status            string `json:"status"`
 }
 
 func (req *Sesbooks) ToDomain() *sesbooks.Domain {
@@ -15,5 +16,6 @@ func (req *Sesbooks) ToDomain() *sesbooks.Domain {
 		IDPatient:         req.IDPatient,
 		IDSessionSchedule: req.IDSessionSchedule,
 		PatientQueue:      req.PatientQueue,
+		Status:            req.Status,
 	}
 }

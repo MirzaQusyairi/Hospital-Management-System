@@ -12,6 +12,7 @@ type SesbookRegisterResponse struct {
 	IDSessionSchedule int       `json:"id_session_schedule"`
 	PatientQueue      int       `json:"patient_queue"`
 	Date              time.Time `json:"date"`
+	Status            string    `json:"status"`
 	CreatedAt         time.Time `json:"created_at"`
 	UpdatedAt         time.Time `json:"updated_at"`
 }
@@ -21,6 +22,7 @@ type SesbookResponse struct {
 	IDSessionSchedule int       `json:"id_session_schedule"`
 	PatientQueue      int       `json:"patient_queue"`
 	Date              time.Time `json:"date"`
+	Status            string    `json:"status"`
 	CreatedAt         time.Time `json:"created_at"`
 	UpdatedAt         time.Time `json:"updated_at"`
 }
@@ -33,6 +35,7 @@ func FromDomainRegister(domain sesbooks.Domain) SesbookRegisterResponse {
 		IDSessionSchedule: domain.IDSessionSchedule,
 		PatientQueue:      domain.PatientQueue,
 		Date:              domain.Date,
+		Status:            domain.Status,
 		CreatedAt:         domain.CreatedAt,
 		UpdatedAt:         domain.UpdatedAt,
 	}
@@ -45,6 +48,7 @@ func FromDomainAllSesbook(domain sesbooks.Domain) SesbookResponse {
 		IDSessionSchedule: domain.IDSessionSchedule,
 		PatientQueue:      domain.PatientQueue,
 		Date:              domain.Date,
+		Status:            domain.Status,
 		CreatedAt:         domain.CreatedAt,
 		UpdatedAt:         domain.UpdatedAt,
 	}
@@ -58,6 +62,7 @@ func FromDomainUpdateSesbook(domain sesbooks.Domain) SesbookRegisterResponse {
 		IDSessionSchedule: domain.IDSessionSchedule,
 		PatientQueue:      domain.PatientQueue,
 		Date:              domain.Date,
+		Status:            domain.Status,
 		CreatedAt:         domain.CreatedAt,
 		UpdatedAt:         domain.UpdatedAt,
 	}
