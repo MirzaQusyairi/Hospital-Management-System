@@ -8,6 +8,7 @@ type Domain struct {
 	IDSessionSchedule int
 	PatientQueue      int
 	Date              time.Time
+	Status            string
 	CreatedAt         time.Time
 	UpdatedAt         time.Time
 }
