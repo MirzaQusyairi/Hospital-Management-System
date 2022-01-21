@@ -8,6 +8,7 @@ type Domain struct {
 	Password     string
 	Name         string
 	Fullname     string
+	Gender       string
 	Specialist   string
 	Address      string
 	Phone_Number string

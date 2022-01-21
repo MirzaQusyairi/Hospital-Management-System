@@ -13,6 +13,7 @@ type Doctors struct {
 	Username     string `json:"username" form:"username" gorm:"unique"`
 	Password     string `json:"password" form:"password"`
 	Fullname     string
+	Gender       string
 	Specialist   string
 	Address      string
 	Phone_Number string
@@ -27,6 +28,7 @@ func toDomain(org Doctors) doctors.Domain {
 		Username:     org.Username,
 		Password:     org.Password,
 		Fullname:     org.Fullname,
+		Gender:       org.Gender,
 		Phone_Number: org.Phone_Number,
 		Specialist:   org.Specialist,
 		Address:      org.Address,
@@ -41,6 +43,7 @@ func toDomainUpdate(upd Doctors) doctors.Domain {
 		Username:     upd.Username,
 		Password:     upd.Password,
 		Fullname:     upd.Fullname,
+		Gender:       upd.Gender,
 		Phone_Number: upd.Phone_Number,
 		Specialist:   upd.Specialist,
 		Address:      upd.Address,
@@ -55,6 +58,7 @@ func fromDomain(domain doctors.Domain) Doctors {
 		Username:     domain.Username,
 		Password:     domain.Password,
 		Fullname:     domain.Fullname,
+		Gender:       domain.Gender,
 		Phone_Number: domain.Phone_Number,
 		Specialist:   domain.Specialist,
 		Address:      domain.Address,

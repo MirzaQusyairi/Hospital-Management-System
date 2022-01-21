@@ -8,6 +8,7 @@ type Doctors struct {
 	Username     string `json:"username"`
 	Password     string `json:"password"`
 	Fullname     string `json:"fullname"`
+	Gender       string `json:"gender"`
 	Specialist   string `json:"specialist"`
 	Address      string `json:"address"`
 	DOB          string `json:"dob"`

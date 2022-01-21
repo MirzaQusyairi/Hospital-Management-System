@@ -8,6 +8,7 @@ import (
 type Patients struct {
 	Fullname string `json:"fullname"`
 	Gender   string `json:"gender"`
+	Age      int    `json:"age"`
 	NIK      int    `json:"nik"`
 	Address  string `json:"address"`
 	DOB      string `json:"dob"`
@@ -17,6 +18,7 @@ type PatientResponse struct {
 	ID        int       `json:"id"`
 	Fullname  string    `json:"fullname"`
 	Gender    string    `json:"gender"`
+	Age       int       `json:"age"`
 	NIK       int       `json:"nik"`
 	Address   string    `json:"address"`
 	DOB       string    `json:"dob"`
@@ -30,6 +32,7 @@ func (req *Patients) ToDomain() *patients.Domain {
 
 		Fullname: req.Fullname,
 		Gender:   req.Gender,
+		Age:      req.Age,
 		NIK:      req.NIK,
 		Address:  req.Address,
 		DOB:      req.DOB,
@@ -41,6 +44,7 @@ func FromDomainAllPatient(domain patients.Domain) PatientResponse {
 		ID:        domain.ID,
 		Fullname:  domain.Fullname,
 		Gender:    domain.Gender,
+		Age:       domain.Age,
 		NIK:       domain.NIK,
 		Address:   domain.Address,
 		DOB:       domain.DOB,
