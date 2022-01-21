@@ -9,6 +9,7 @@ type Domain struct {
 	Fullname              string
 	Address               string
 	Gender                string
+	Age                   int
 	NIK                   int
 	No_Rm                 string
 	DOB                   string

@@ -11,6 +11,7 @@ type DoctorRegisterRespons struct {
 	Username     string    `json:"username"`
 	Password     string    `json:"password"`
 	Fullname     string    `json:"fullname"`
+	Gender       string    `json:"gender"`
 	Specialist   string    `json:"specialist"`
 	Address      string    `json:"address"`
 	DOB          string    `json:"dob"`
@@ -22,6 +23,7 @@ type DoctorResponse struct {
 	ID           int       `json:"id"`
 	Username     string    `json:"username"`
 	Fullname     string    `json:"fullname"`
+	Gender       string    `json:"gender"`
 	Specialist   string    `json:"specialist"`
 	Address      string    `json:"address"`
 	DOB          string    `json:"dob"`
@@ -36,6 +38,7 @@ func FromDomainRegister(domain doctors.Domain) DoctorRegisterRespons {
 		ID:         domain.ID,
 		Fullname:   domain.Fullname,
 		Username:   domain.Username,
+		Gender:     domain.Gender,
 		Specialist: domain.Specialist,
 		Address:    domain.Address,
 		DOB:        domain.DOB,
@@ -48,6 +51,7 @@ func FromDomainAllDoctor(domain doctors.Domain) DoctorResponse {
 		ID:           domain.ID,
 		Fullname:     domain.Fullname,
 		Username:     domain.Username,
+		Gender:       domain.Gender,
 		Specialist:   domain.Specialist,
 		Address:      domain.Address,
 		DOB:          domain.DOB,

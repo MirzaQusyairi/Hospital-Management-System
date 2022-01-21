@@ -15,6 +15,7 @@ type Patients struct {
 	Fullname              string
 	Address               string
 	Gender                string
+	Age                   int
 	NIK                   int
 	No_Rm                 string
 	DOB                   string
@@ -30,6 +31,7 @@ func toDomain(ex Patients) patients.Domain {
 		Fullname:              ex.Fullname,
 		Address:               ex.Address,
 		Gender:                ex.Gender,
+		Age:                   ex.Age,
 		NIK:                   ex.NIK,
 		No_Rm:                 ex.No_Rm,
 		DOB:                   ex.DOB,
@@ -46,6 +48,7 @@ func fromDomain(domain patients.Domain) Patients {
 		Fullname:              domain.Fullname,
 		Address:               domain.Address,
 		Gender:                domain.Gender,
+		Age:                   domain.Age,
 		NIK:                   domain.NIK,
 		No_Rm:                 domain.No_Rm,
 		DOB:                   domain.DOB,
@@ -62,6 +65,7 @@ func toDomainUpdate(ex Patients) patients.Domain {
 		Fullname:              ex.Fullname,
 		Address:               ex.Address,
 		Gender:                ex.Gender,
+		Age:                   ex.Age,
 		NIK:                   ex.NIK,
 		No_Rm:                 ex.No_Rm,
 		DOB:                   ex.DOB,
