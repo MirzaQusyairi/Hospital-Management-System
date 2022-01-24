@@ -24,6 +24,7 @@ type Service interface {
 type Repository interface {
 	AllSessionBook() ([]Domain, error)
 	AddSessionBook(domain *Domain) (Domain, error)
+	UpdateStatus(sesID int, status string) (string, error)
 	Update(sesID int, domain *Domain) (Domain, error)
 	SessionBookByID(id int) (Domain, error)
 	Delete(id int) (string, error)

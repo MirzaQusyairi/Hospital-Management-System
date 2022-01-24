@@ -5,6 +5,7 @@ import (
 	"Hospital-Management-System/business/doctors"
 	"Hospital-Management-System/business/patients"
 	"Hospital-Management-System/business/sesbooks"
+	"log"
 )
 
 type servicePrescription struct {
@@ -50,12 +51,15 @@ func (serv *servicePrescription) AddPrescription(domain *Domain) (Domain, error)
 		return Domain{}, err
 	}
 	domain.SessionBookingID = resultSesbook.ID
-	result, err := serv.prescriptionRepository.AddPrescription(domain)
-
+	updateStatus, err := serv.sesbookRepository.UpdateStatus(domain.SessionBookingID, "Checked")
 	if err != nil {
 		return Domain{}, err
 	}
-
+	log.Println(updateStatus)
+	result, err := serv.prescriptionRepository.AddPrescription(domain)
+	if err != nil {
+		return Domain{}, err
+	}
 	return result, nil
 }
 

@@ -2,6 +2,7 @@ package sesbooks
 
 import (
 	"Hospital-Management-System/business"
+	"Hospital-Management-System/business/facilities"
 	"Hospital-Management-System/business/patients"
 	"Hospital-Management-System/business/seschedules"
 	"time"
@@ -11,13 +12,15 @@ type serviceSesbook struct {
 	sesbookRepository        Repository
 	PatientsRepository       patients.Repository
 	SessionScheduleRepositry seschedules.Repository
+	FacilitiesRepository     facilities.Repository
 }
 
-func NewServiceSesbook(repoSesbook Repository, repoPatients patients.Repository, repoSessionSchedule seschedules.Repository) Service {
+func NewServiceSesbook(repoSesbook Repository, repoPatients patients.Repository, repoSessionSchedule seschedules.Repository, repoFacility facilities.Repository) Service {
 	return &serviceSesbook{
 		sesbookRepository:        repoSesbook,
 		PatientsRepository:       repoPatients,
 		SessionScheduleRepositry: repoSessionSchedule,
+		FacilitiesRepository:     repoFacility,
 	}
 }
 
@@ -42,15 +45,26 @@ func (serv *serviceSesbook) AddSessionBook(domain *Domain) (Domain, error) {
 	if err != nil {
 		return Domain{}, err
 	}
+	findLatestQueue, err := serv.FacilitiesRepository.FacByID(resultSessionSchedule.IDFacilty)
+	if err != nil {
+		return Domain{}, err
+	}
+	if findLatestQueue.Queue+1 > findLatestQueue.Capacity {
+		return Domain{}, err
+	}
+	lastQueue := findLatestQueue.Queue
+	resultUpdateQueue, err := serv.FacilitiesRepository.UpdateQueue(resultSessionSchedule.IDFacilty, lastQueue)
+	if err != nil {
+		return Domain{}, err
+	}
+	domain.PatientQueue = resultUpdateQueue
 	domain.IDSessionSchedule = resultSessionSchedule.ID
 	dateNow := time.Now()
 	domain.Date = dateNow
 	result, err := serv.sesbookRepository.AddSessionBook(domain)
-
 	if err != nil {
 		return Domain{}, err
 	}
-
 	return result, nil
 }
 

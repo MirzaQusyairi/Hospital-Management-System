@@ -3,6 +3,7 @@ package sesbooks
 import (
 	"Hospital-Management-System/business"
 	"Hospital-Management-System/business/sesbooks"
+	"log"
 
 	"gorm.io/gorm"
 )
@@ -17,11 +18,21 @@ func NewMysqlSesbooksRepository(conn *gorm.DB) sesbooks.Repository {
 	}
 }
 
+func (rep *MysqlSesbooksRepository) UpdateStatus(sesID int, status string) (string, error) {
+	log.Println(sesID, status, "sesID, status")
+	result := rep.Conn.Where("id = ?", sesID).Model(Sesbooks{}).Update("status", "Checked")
+	if result.Error != nil {
+		return "failed", result.Error
+	}
+	log.Println(result)
+	return "success", nil
+}
+
 func (rep *MysqlSesbooksRepository) AddSessionBook(domain *sesbooks.Domain) (sesbooks.Domain, error) {
 
 	sesbookking := fromDomain(*domain)
 
-	result := rep.Conn.Create(&sesbookking)
+	result := rep.Conn.Create(&sesbookking).Where("date = ?", domain.Date)
 	if result.Error != nil {
 		return sesbooks.Domain{}, result.Error
 	}
