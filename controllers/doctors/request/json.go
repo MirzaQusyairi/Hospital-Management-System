@@ -24,6 +24,7 @@ func (req *Doctors) ToDomain() *doctors.Domain {
 		Username:     req.Username,
 		Password:     req.Password,
 		Fullname:     req.Fullname,
+		Gender:       req.Gender,
 		Specialist:   req.Specialist,
 		Address:      req.Address,
 		DOB:          req.DOB,
