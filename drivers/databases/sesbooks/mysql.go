@@ -32,7 +32,7 @@ func (rep *MysqlSesbooksRepository) AddSessionBook(domain *sesbooks.Domain) (ses
 
 	sesbookking := fromDomain(*domain)
 
-	result := rep.Conn.Create(&sesbookking).Where("date = ?", domain.Date)
+	result := rep.Conn.Create(&sesbookking)
 	if result.Error != nil {
 		return sesbooks.Domain{}, result.Error
 	}
