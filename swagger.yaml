@@ -1,0 +1,976 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "Hms API"
+  contact: {}
+host: "localhost:8080"
+basePath: "/"
+tags:
+  - name: "Admin"
+  - name: "Doctor"
+  - name: "Patient"
+  - name: "Nurses"
+  - name: "Schedule"
+  - name: "Prescription"
+  - name: "Facilty"
+  - name: "Sessionschedule"
+  - name: "Sessionbooking"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+security: []
+paths:
+  /api/v1/admins/login:
+    post:
+      tags:
+        - "Admin"
+      summary: "login admin"
+      operationId: "loginadmin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+          default: "Bearer {token}"
+          x-exportParamName: "Authorization"
+          x-optionalDataType: "String"
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/loginadminrequest"
+          x-exportParamName: "Body"
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/register:
+    post:
+      tags:
+        - "Admin"
+      summary: "register admin"
+      operationId: "registeradmin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+          default: "Bearer {token}"
+          x-exportParamName: "Authorization"
+          x-optionalDataType: "String"
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/registeradminrequest"
+          x-exportParamName: "Body"
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/update/doctor/1:
+    put:
+      tags:
+        - "Admin"
+      summary: "update doc"
+      operationId: "updatedoc"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+          default: "Bearer {token}"
+          x-exportParamName: "Authorization"
+          x-optionalDataType: "String"
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/updatedocrequest"
+          x-exportParamName: "Body"
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/add/doctor:
+    post:
+      tags:
+        - "Doctor"
+      summary: "register"
+      operationId: "register"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/registerrequest"
+          x-exportParamName: "Body"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/doctors/login:
+    post:
+      tags:
+        - "Doctor"
+      summary: "login"
+      operationId: "login"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+          default: "Bearer {token}"
+          x-exportParamName: "Authorization"
+          x-optionalDataType: "String"
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/loginrequest"
+          x-exportParamName: "Body"
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/delete/doctor/3:
+    delete:
+      tags:
+        - "Doctor"
+      summary: "delete"
+      operationId: "delete"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/doctor:
+    get:
+      tags:
+        - "Doctor"
+      summary: "doctor"
+      operationId: "doctor"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+          default: "Bearer {token}"
+          x-exportParamName: "Authorization"
+          x-optionalDataType: "String"
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/add/patient:
+    post:
+      tags:
+        - "Patient"
+      summary: "add"
+      operationId: "addpatient"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/addpatientrequest"
+          x-exportParamName: "Body"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/update/patient/2:
+    put:
+      tags:
+        - "Patient"
+      summary: "update"
+      operationId: "patientupdate"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/delete/patient/{id}:
+    delete:
+      tags:
+        - "Patient"
+      summary: "delete"
+      operationId: "Deletedelete"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+          x-exportParamName: "Id"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/patient:
+    get:
+      tags:
+        - "Patient"
+      summary: "patient"
+      operationId: "patient"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+          
+  /api/v1/admins/add/schedule:
+    post:
+      tags:
+        - "Schedule"
+      summary: "add"
+      operationId: "addschedule"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/addschedulerequest"
+          x-exportParamName: "Body"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/update/schedule/2:
+    put:
+      tags:
+        - "Schedule"
+      summary: "update"
+      operationId: "scheduleupdate"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/delete/schedule/{id}:
+    delete:
+      tags:
+        - "Schedule"
+      summary: "delete"
+      operationId: "Deletedelete"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+          x-exportParamName: "Id"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/schedule:
+    get:
+      tags:
+        - "Schedule"
+      summary: "schedule"
+      operationId: "patient"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+
+  /api/v1/admins/add/prescription:
+    post:
+      tags:
+        - "Prescription"
+      summary: "add"
+      operationId: "addprescription"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/addprescriptionrequest"
+          x-exportParamName: "Body"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/update/prescription/2:
+    put:
+      tags:
+        - "Prescription"
+      summary: "update"
+      operationId: "prescriptionupdate"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/delete/prescription/{id}:
+    delete:
+      tags:
+        - "Prescription"
+      summary: "delete"
+      operationId: "Deletedelete"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+          x-exportParamName: "Id"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/prescription:
+    get:
+      tags:
+        - "Prescription"
+      summary: "prescription"
+      operationId: "prescription"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/prescription/{id}:
+    get:
+      tags:
+        - "Prescription"
+      summary: "prescription"
+      operationId: "prescriptionbyid"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/add/sessionschedule:
+    post:
+      tags:
+        - "Sessionschedule"
+      summary: "add"
+      operationId: "addsessionschedule"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/addsessionschedulerequest"
+          x-exportParamName: "Body"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/update/sessionschedule/2:
+    put:
+      tags:
+        - "Sessionschedule"
+      summary: "update"
+      operationId: "sessionscheduleupdate"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/delete/sessionschedule/{id}:
+    delete:
+      tags:
+        - "Sessionschedule"
+      summary: "delete"
+      operationId: "Deletedelete"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+          x-exportParamName: "Id"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/sessionschedule:
+    get:
+      tags:
+        - "Sessionschedule"
+      summary: "sessionschedule"
+      operationId: "sessionschedule"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/sessionschedule/{id}:
+    get:
+      tags:
+        - "Sessionschedule"
+      summary: "sessionschedule"
+      operationId: "sessionschedulebyid"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+
+  /api/v1/admins/add/facilty:
+    post:
+      tags:
+        - "Facilty"
+      summary: "add"
+      operationId: "addfacilty"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/addfaciltyschedulerequest"
+          x-exportParamName: "Body"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/update/facilty/2:
+    put:
+      tags:
+        - "Facilty"
+      summary: "update"
+      operationId: "faciltyupdate"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/delete/facilty/{id}:
+    delete:
+      tags:
+        - "Facilty"
+      summary: "delete"
+      operationId: "Deletedelete"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+          x-exportParamName: "Id"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/facilty:
+    get:
+      tags:
+        - "Facilty"
+      summary: "facilty"
+      operationId: "facilty"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/facilty/{id}:
+    get:
+      tags:
+        - "Facilty"
+      summary: "facilty"
+      operationId: "faciltybyid"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/nurses/login:
+    post:
+      tags:
+        - "Nurses"
+      summary: "login"
+      operationId: "login"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: false
+          type: "string"
+          default: "Bearer {token}"
+          x-exportParamName: "Authorization"
+          x-optionalDataType: "String"
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/loginrequest"
+          x-exportParamName: "Body"
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/add/nurse:
+    post:
+      tags:
+        - "Nurses"
+      summary: "add"
+      operationId: "addnurse"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/nurserequest"
+          x-exportParamName: "Body"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/update/nurse/2:
+    put:
+      tags:
+        - "Nurses"
+      summary: "update"
+      operationId: "faciltyupdate"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/delete/nurse/{id}:
+    delete:
+      tags:
+        - "Nurses"
+      summary: "delete"
+      operationId: "Deletedelete"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+          x-exportParamName: "Id"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/nurse:
+    get:
+      tags:
+        - "Nurses"
+      summary: "nurse"
+      operationId: "nurse"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/nurse/{id}:
+    get:
+      tags:
+        - "Nurses"
+      summary: "nurse"
+      operationId: "nursebyid"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/add/sessionbook:
+    post:
+      tags:
+        - "Sessionbook"
+      summary: "add"
+      operationId: "addsessionbook"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "Body"
+          description: ""
+          required: true
+          schema:
+            $ref: "#/definitions/sessionbookrequest"
+          x-exportParamName: "Body"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/update/sessionbook/2:
+    put:
+      tags:
+        - "Sessionbook"
+      summary: "update"
+      operationId: "sessionbookupdate"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/delete/sessionbook/{id}:
+    delete:
+      tags:
+        - "Sessionbook"
+      summary: "delete"
+      operationId: "Deletedelete"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: ""
+          required: true
+          type: "string"
+          x-exportParamName: "Id"
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/sessionbook:
+    get:
+      tags:
+        - "Sessionbook"
+      summary: "sessionbook"
+      operationId: "sessionbook"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+  /api/v1/admins/list/sessionbook/{id}:
+    get:
+      tags:
+        - "Sessionbook"
+      summary: "sessionbook"
+      operationId: "sessionbookbyid"
+      produces:
+        - "application/json"
+      parameters: []
+      security:
+        - bearer: []
+      deprecated: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+securityDefinitions: {}
+definitions:
+  loginadminrequest:
+    type: "object"
+    required:
+      - "password"
+      - "username"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+    title: "loginadminrequest"
+    example:
+      username: "admin"
+      password: "admin123"
+  registeradminrequest:
+    type: "object"
+    required:
+      - "password"
+      - "username"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+    title: "registeradminrequest"
+    example:
+      username: "admin"
+      password: "admin123"
+  registerrequest:
+    type: "object"
+    required:
+      - "fullname"
+      - "gender"
+      - "name"
+      - "specialist"
+      - "password"
+      - "phone_number"
+      - "address"
+      - "dob"
+      - "username"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+      name:
+        type: "string"
+      address:
+        type: "string"
+      dob:
+        type: "string"
+      specialist:
+        type: "string"
+      gender:
+        type: "string"
+      phone_number:
+        type: "string"
+      fullname:
+        type: "string"
+    title: "registerrequest"
+    example:
+      gender: "cewek"
+      username: "dr_sarah"
+      password: "sarah123"
+      fullname: "Sarah"
+      address: "345435"
+      specialist: "Hati"
+      address: "A27"
+      phone_number: "086756465565"
+      dob: "28 agustus 1999"
+  loginrequest:
+    type: "object"
+    required:
+      - "password"
+      - "username"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+    title: "loginrequest"
+    example:
+      username: "dr_sar"
+      password: "sar123"
+  updaterequest:
+    type: "object"
+    required:
+      - "fullname"
+      - "gender"
+      - "name"
+      - "specialist"
+      - "password"
+      - "phone_number"
+      - "address"
+      - "dob"
+      - "username"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+      name:
+        type: "string"
+      address:
+        type: "string"
+      dob:
+        type: "string"
+      specialist:
+        type: "string"
+      gender:
+        type: "string"
+      phone_number:
+        type: "string"
+      fullname:
+        type: "string"
+    title: "updaterequest"
+    example:
+      gender: "cewek"
+      username: "dr_sarah"
+      password: "sarah123"
+      fullname: "Sarah"
+      address: "345435"
+      specialist: "Hati"
+      address: "A27"
+      phone_number: "086756465565"
+      dob: "28 agustus 1991"
