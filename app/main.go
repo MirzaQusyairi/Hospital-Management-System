@@ -130,7 +130,7 @@ func main() {
 	sessionscheduleCtrl := _sesScheduleController.NewControllerSessionSchedule(sessionscheduleService)
 
 	sesbookRepo := _driverFactory.NewSesbookRepository(db)
-	sesbookService := _sesbookService.NewServiceSesbook(sesbookRepo, patientRepo, sessionscheduleRepo)
+	sesbookService := _sesbookService.NewServiceSesbook(sesbookRepo, patientRepo, sessionscheduleRepo, faciltyRepo)
 	sesbookCtrl := _sesbookController.NewControllerSesbook(sesbookService)
 
 	prescriptionRepo := _driverFactory.NewPrescriptionRepository(db)

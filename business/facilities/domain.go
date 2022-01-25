@@ -24,6 +24,7 @@ type Repository interface {
 	AllFacilty() ([]Domain, error)
 	AddFacilty(domain *Domain) (Domain, error)
 	Update(facID int, domain *Domain) (Domain, error)
+	UpdateQueue(facID int, queue int) (int, error)
 	FacByID(id int) (Domain, error)
 	Delete(id int) (string, error)
 }

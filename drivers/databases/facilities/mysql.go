@@ -16,6 +16,14 @@ func NewMysqlFaciltyRepository(conn *gorm.DB) facilities.Repository {
 		Conn: conn,
 	}
 }
+
+func (rep *MysqlFaciltyRepository) UpdateQueue(facID int, queue int) (int, error) {
+	err := rep.Conn.Model(Facilities{}).Where("id = ?", facID).Update("queue", queue+1).Error
+	if err != nil {
+		return 0, err
+	}
+	return queue + 1, nil
+}
 func (rep *MysqlFaciltyRepository) AllFacilty() ([]facilities.Domain, error) {
 
 	var facilty []Facilities

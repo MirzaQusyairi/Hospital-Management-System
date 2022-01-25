@@ -49,19 +49,19 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	e.POST("/api/v1/admins/add/schedule", cl.ScheduleController.AddSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/schedule/:id", cl.ScheduleController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.DELETE("/api/v1/admins/delete/schedule/:id", cl.ScheduleController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
-	e.GET("/api/v1/admins/list/schedule", cl.ScheduleController.AllSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/list/schedule", cl.ScheduleController.AllSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 	e.GET("/api/v1/admins/schedule/:id", cl.ScheduleController.ScheduleByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 
 	e.POST("/api/v1/admins/add/sessionschedule", cl.SessionScheduleController.AddSessionSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/sessionschedule/:id", cl.SessionScheduleController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.DELETE("/api/v1/admins/delete/sessionschedule/:id", cl.SessionScheduleController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
-	e.GET("/api/v1/admins/list/sessionschedule", cl.SessionScheduleController.AllSessionSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/list/sessionschedule", cl.SessionScheduleController.AllSessionSchedule, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 	e.GET("/api/v1/admins/sessionschedule/:id", cl.SessionScheduleController.SessionScheduleByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 
 	e.POST("/api/v1/admins/add/facilty", cl.FaciltyController.AddFacilty, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/facilty/:id", cl.FaciltyController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.DELETE("/api/v1/admins/delete/facilty/:id", cl.FaciltyController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
-	e.GET("/api/v1/admins/list/facilty", cl.FaciltyController.AllFacilty, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/list/facilty", cl.FaciltyController.AllFacilty, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 	e.GET("/api/v1/admins/facilty/:id", cl.FaciltyController.FacByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 
 	e.POST("/api/v1/admins/add/patient", cl.PatientController.Register, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
@@ -74,7 +74,7 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	e.POST("/api/v1/admins/add/doctor", cl.DoctorController.Register, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/doctor/:id", cl.DoctorController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.DELETE("/api/v1/admins/delete/doctor/:id", cl.DoctorController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
-	e.GET("/api/v1/admins/list/doctor", cl.DoctorController.AllDoctor, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/list/doctor", cl.DoctorController.AllDoctor, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 	e.GET("/api/v1/admins/doctor/:id", cl.DoctorController.DoctorByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdminandDoctor())
 
 	e.POST("/api/v1/admins/add/nurse", cl.NurseController.Register, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
@@ -86,7 +86,7 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	e.POST("/api/v1/admins/add/sessionbook", cl.SesbookController.AddSessionBook, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.PUT("/api/v1/admins/update/sessionbook/:id", cl.SesbookController.Update, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	e.DELETE("/api/v1/admins/delete/sessionbook/:id", cl.SesbookController.Delete, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
-	e.GET("/api/v1/admins/list/sessionbook", cl.SesbookController.AllSessionBook, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
+	e.GET("/api/v1/admins/list/sessionbook", cl.SesbookController.AllSessionBook, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAll())
 	e.GET("/api/v1/admins/sessionbook/:id", cl.SesbookController.SessionBookByID, middleware.JWTWithConfig(cl.JWTMiddleware), RoleValidationAdmin())
 	// Doctors
 	e.POST("/api/v1/doctors/login", cl.DoctorController.Login)
