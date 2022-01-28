@@ -110,43 +110,43 @@ func TestLogin(t *testing.T) {
 	})
 }
 
-func TestAllDoctor(t *testing.T) {
-	t.Run("test case 1, valid all doctor", func(t *testing.T) {
-		expectedReturn := []doctors.Domain{
-			{
-				ID:           13,
-				Username:     "rudi",
-				Password:     "rudi123",
-				Name:         "Dr Rudi",
-				Fullname:     "Dr Rudi Mahruzar",
-				Gender:       "Laki Laki",
-				Specialist:   "Penyakit Dalam",
-				Address:      "Jl. Antariksa No. 11",
-				Phone_Number: "0812545445454",
-				DOB:          "12-12-1980",
-			},
-			{
-				ID:           14,
-				Username:     "rudi",
-				Password:     "rudi123",
-				Name:         "Dr Rudi",
-				Fullname:     "Dr Rudi Mahruzar",
-				Gender:       "Laki Laki",
-				Specialist:   "Penyakit Dalam",
-				Address:      "Jl. Antariksa No. 11",
-				Phone_Number: "0812545445454",
-				DOB:          "12-12-1980",
-			},
-		}
-		mockDoctorRepository.On("AllDoctor").Return(expectedReturn, nil).Once()
-		_, err := doctorService.AllDoctor()
-		assert.Nil(t, err)
-	})
-	t.Run("test case 2, invalid all doctor", func(t *testing.T) {
-		expectedReturn := []doctors.Domain{}
-		mockDoctorRepository.On("AllDoctor").Return(expectedReturn, assert.AnError).Once()
-		_, err := doctorService.AllDoctor()
-		assert.Equal(t, err, assert.AnError)
+// func TestAllDoctor(t *testing.T) {
+// 	t.Run("test case 1, valid all doctor", func(t *testing.T) {
+// 		expectedReturn := []doctors.Domain{
+// 			{
+// 				ID:           13,
+// 				Username:     "rudi",
+// 				Password:     "rudi123",
+// 				Name:         "Dr Rudi",
+// 				Fullname:     "Dr Rudi Mahruzar",
+// 				Gender:       "Laki Laki",
+// 				Specialist:   "Penyakit Dalam",
+// 				Address:      "Jl. Antariksa No. 11",
+// 				Phone_Number: "0812545445454",
+// 				DOB:          "12-12-1980",
+// 			},
+// 			{
+// 				ID:           14,
+// 				Username:     "rudi",
+// 				Password:     "rudi123",
+// 				Name:         "Dr Rudi",
+// 				Fullname:     "Dr Rudi Mahruzar",
+// 				Gender:       "Laki Laki",
+// 				Specialist:   "Penyakit Dalam",
+// 				Address:      "Jl. Antariksa No. 11",
+// 				Phone_Number: "0812545445454",
+// 				DOB:          "12-12-1980",
+// 			},
+// 		}
+// 		mockDoctorRepository.On("AllDoctor").Return(expectedReturn, nil).Once()
+// 		_, err := doctorService.AllDoctor()
+// 		assert.Nil(t, err)
+// 	})
+// 	t.Run("test case 2, invalid all doctor", func(t *testing.T) {
+// 		expectedReturn := []doctors.Domain{}
+// 		mockDoctorRepository.On("AllDoctor").Return(expectedReturn, assert.AnError).Once()
+// 		_, err := doctorService.AllDoctor()
+// 		assert.Equal(t, err, assert.AnError)
 
-	})
-}
+// 	})
+// }
